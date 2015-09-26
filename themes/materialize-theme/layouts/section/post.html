@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
+    <head>
+        {{ partial "head.html" . }}
+    </head>
+    <body id="page-top">
+
+        {{ partial "nav.html" . }}
+
+        <section id="list-posts">
+            <div class="container">
+                <div class="col-sm-8 blog-content">
+                    <div class="blog-posts text-boxes">
+                    <!-- /.blog-posts -->
+                    {{ $paginator := .Paginate (where .Data.Pages "Type" "post") }}
+                    {{ range $paginator.Pages }}
+                       {{ .Render "summary"}}
+                    {{ end }}
+
+                    </div>
+                    {{ partial "pagination.html" . }}
+                </div>
+            </div>
+        </section>
+
+        {{ partial "js.html" . }}
+    </body>
+</html>

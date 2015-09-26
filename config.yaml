@@ -1,0 +1,96 @@
+---
+BaseUrl: "http://localhost:1313"
+LanguageCode: "pt_br"
+Title: "Leandro Lugaresi"
+Footnotereturnlinkcontents: "↩"
+Theme: "materialize-theme"
+menu:
+  main:
+    -
+      Name: "Home"
+      # Pre: "<i class='fa fa-heart'></i>"
+      Weight: -110
+      Identifier: "home"
+      URL: "/about/"
+    -
+      Name: "getting started"
+      # Pre: "<i class='fa fa-road'></i>"
+      Weight: -100
+      URL: "/getting-started/"
+params:
+  AuthorName: "Leandro Lugaresi"
+  GitHubUser: "leandro-lugaresi"
+  Description: "Software Engineer - PHP (Zend Framework2), Elixir and Golang padawan"
+  Brand: "Leandro Lugaresi"
+  Home:
+    Headline: "Desenvolvimento"
+    Commands:
+      - de APIs
+      - PHP
+      - em ZF2
+      - em SF2
+  About:
+    Headline: "Um pouco sobre mim!"
+    ProgressTitle: "Tecnologias"
+    Lead: "Meu nome é Leandro Luiz Lugaresi, tenho 23 anos e sou graduado em Análise e Desenvolvimento de Sistemas pela FTEC Bento Gonçalves."
+    Description: >
+        Sou desenvolvedor PHP desde 2011, e desde 2013 com Zend Framework 2 e Doctrine 2.
+
+        Atualmente trabalho na [CodeRockr](http://coderockr.com/) como desenvolvedor PHP, tenho trabalhado na manutenção e migração de um MVP Drupal para uma arquitetura em microservices onde sou o responsável por uma API RestFull (Synfony 2 + mongoDB + rabbitMQ)
+
+        Estou sempre buscando aprender mais sobre segurança, performance e modularidade em projetos web. Atualmente estou focando no aprendizado e no uso de Elixir e Golang.
+    Progress:
+      -
+        Name: "PHP + MySQL + Frameworks (SF2, ZF2, Slim, Silex) + Doctrine 2"
+        Percent: 90
+      -
+        Name: "MongoDB"
+        Percent: 75
+      -
+        Name: "RabbitMQ"
+        Percent: 50
+      -
+        Name: "Docker"
+        Percent: 50
+      -
+        Name: "Elixir"
+        Percent: 5
+      -
+        Name: "Earlang"
+        Percent: 0
+      -
+        Name: "Golang"
+        Percent: 5
+  Services:
+    Headline: >
+        Desenvolvimento de Software com <span class="span_h2">qualidade</span> e <span class="span_h2">segurança</span>, usando os <span class="span_h2">melhores</span> frameworks e tecnologias do mercado!
+    List:
+      -
+        Icon: mdi-image-flash-on
+        Title: Performance
+        Description: Eu estou sempre buscando criar aplicações focadas em performance e escalabilidade.
+      -
+        Icon: mdi-action-verified-user
+        Title: Segurança
+        Description: Segurança é algo muito sério e deve ser abordado desde o início do projeto!
+      -
+        Icon: mdi-action-extension
+        Title: Sistemas modulares
+        Description: Trabalho para criar soluções modulares, desde o código fonte até a criação de diversos sistemas em uma arquitetura distribuida.
+      -
+        Icon: mdi-action-favorite
+        Title: Made with Love
+        Description: Sou apaixonado por Open Source, estou sempre tentando apoiar e contribuir, abaixo você pode ver alguns projetos que eu estou mantendo.
+  Parallax:
+    First:
+      Image: img/coding-02.jpg
+      Text: Desenvolvimento com tecnologias avançadas e soluções alinhadas ao negócio
+    Second:
+      Image: img/coding-03.jpg
+      Text:
+  Social:
+    GitHub: https://github.com/leandro-lugaresi
+    Facebook: https://www.facebook.com/leandro.lugaresi
+    Twitter: https://twitter.com/leandrolugaresi
+    Instagram: https://instagram.com/leandrolugaresi
+---

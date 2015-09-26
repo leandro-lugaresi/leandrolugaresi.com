@@ -1,0 +1,8 @@
+modalID: 1
+title: Google Authenticator Client
+date: 2014-09-18
+img: google-authenticator.png
+client: Open Source
+clientLink: "https://github.com/leandro-lugaresi/google-authenticator"
+category: Web Development
+description: Desenvolvimento de uma lib para a integração entre aplicações PHP e o [Google Authenticator](https://www.google.com/landing/2step/), possibilitando a implementação de um sistema [2FA](https://en.wikipedia.org/wiki/Two-factor_authentication).

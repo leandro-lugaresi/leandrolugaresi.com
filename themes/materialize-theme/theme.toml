@@ -1,0 +1,12 @@
+name = "Materialize Theme"
+license = ""
+licenselink = ""
+description = "Blog theme."
+homepage = "//github.com/leandrolugaresi/materialize-theme"
+tags = ["blog", "portfolio"]
+features = ["responsive", "portfolio", "Google Material Design"]
+min_version = 0.14
+
+[author]
+  name = "Leandro Lugaresi"
+  homepage = "//github.com/leandro-lugaresi"

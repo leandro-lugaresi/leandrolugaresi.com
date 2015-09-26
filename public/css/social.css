@@ -1,0 +1,521 @@
+.social {
+    padding: 0;
+    margin: 0;
+    font-size: 0;
+    line-height: 1;
+}
+.social li {
+    display: inline-block;
+    font-family: 'fontello-social';
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+.social.pull-right li {
+    margin: 0 0 0 5px
+}
+.text-center .social li {
+    margin: 0 2px
+}
+.social li a {
+    display: table
+}
+.social li a i {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    color: #f5f5f5;
+    background: none;
+    line-height: 1;
+    border: 2px solid #aaa;
+    width: 30px;
+    height: 30px !important;
+    line-height: 26px;
+    font-size: 12px;
+    border-radius: 100%;
+    transition: all 150ms ease-in;
+}
+.social .fa-pinterest {
+    border-color: #d8545d;
+    color: #d8545d;
+}
+.social .fa-rss {
+    border-color: #faaa5e;
+    color: #faaa5e;
+}
+.social .fa-facebook {
+    border-color: #677fb5;
+    color: #677fb5;
+}
+.social .fa-twitter {
+    border-color: #70c2e9;
+    color: #70c2e9;
+}
+.social .fa-flickr {
+    border-color: #ff3ba4;
+    color: #ff3ba4;
+}
+.social .fa-dribbble {
+    border-color: #e299c2;
+    color: #e299c2;
+}
+.social .fa-behance {
+    border-color: #42a9fb;
+    color: #42a9fb;
+}
+.social .fa-linkedin {
+    border-color: #3daccf;
+    color: #3daccf;
+}
+.social .fa-vimeo {
+    border-color: #42b5d4;
+    color: #42b5d4;
+}
+.social .fa-youtube {
+    border-color: #d5615c;
+    color: #d5615c;
+}
+.social .fa-skype {
+    border-color: #5ecbf3;
+    color: #5ecbf3;
+}
+.social .fa-tumblr {
+    border-color: #829fb9;
+    color: #829fb9;
+}
+.social .fa-delicious {
+    border-color: #6194dc;
+    color: #6194dc;
+}
+.social .fa-500px {
+    border-color: #3bbbe6;
+    color: #3bbbe6;
+}
+.social .fa-grooveshark {
+    border-color: #f88e3b;
+    color: #f88e3b;
+}
+.social .fa-forrst {
+    border-color: #5f9864;
+    color: #5f9864;
+}
+.social .fa-digg {
+    border-color: #507faa;
+    color: #507faa;
+}
+.social .fa-blogger {
+    border-color: #fd893f;
+    color: #fd893f;
+}
+.social .fa-klout {
+    border-color: #e16747;
+    color: #e16747;
+}
+.social .fa-dropbox {
+    border-color: #6ba3c5;
+    color: #6ba3c5;
+}
+.social .fa-github {
+    border-color: #6c93bb;
+    color: #6c93bb;
+}
+.social .fa-songkick {
+    border-color: #ff3b60;
+    color: #ff3b60;
+}
+.social .fa-posterous {
+    border-color: #efd57c;
+    color: #efd57c;
+}
+.social .fa-appnet {
+    border-color: #3daad5;
+    color: #3daad5;
+}
+.social .fa-gplus {
+    border-color: #bc7067;
+    color: #bc7067;
+}
+.social .fa-stumbleupon {
+    border-color: #f07356;
+    color: #f07356;
+}
+.social .fa-lastfm {
+    border-color: #cd443d;
+    color: #cd443d;
+}
+.social .fa-spotify {
+    border-color: #9acf48;
+    color: #9acf48;
+}
+.social .fa-instagram {
+    border-color: #926d53;
+    color: #926d53;
+}
+.social .fa-evernote {
+    border-color: #9fdc82;
+    color: #9fdc82;
+}
+.social .fa-paypal {
+    border-color: #5b85a8;
+    color: #5b85a8;
+}
+.social .fa-picasa {
+    border-color: #b088c1;
+    color: #b088c1;
+}
+.social .fa-soundcloud {
+    border-color: #ff8b45;
+    color: #ff8b45;
+}
+.social a:hover .fa-pinterest {
+    background-color: #d8545d
+}
+.social a:hover .fa-rss {
+    background-color: #faaa5e
+}
+.social a:hover .fa-facebook {
+    background-color: #677fb5
+}
+.social a:hover .fa-twitter {
+    background-color: #70c2e9
+}
+.social a:hover .fa-flickr {
+    background-color: #ff3ba4
+}
+.social a:hover .fa-dribbble {
+    background-color: #e299c2
+}
+.social a:hover .fa-behance {
+    background-color: #42a9fb
+}
+.social a:hover .fa-linkedin {
+    background-color: #3daccf
+}
+.social a:hover .fa-vimeo {
+    background-color: #42b5d4
+}
+.social a:hover .fa-youtube {
+    background-color: #d5615c
+}
+.social a:hover .fa-skype {
+    background-color: #5ecbf3
+}
+.social a:hover .fa-tumblr {
+    background-color: #829fb9
+}
+.social a:hover .fa-delicious {
+    background-color: #6194dc
+}
+.social a:hover .fa-500px {
+    background-color: #3bbbe6
+}
+.social a:hover .fa-grooveshark {
+    background-color: #f88e3b
+}
+.social a:hover .fa-forrst {
+    background-color: #5f9864
+}
+.social a:hover .fa-digg {
+    background-color: #507faa
+}
+.social a:hover .fa-blogger {
+    background-color: #fd893f
+}
+.social a:hover .fa-klout {
+    background-color: #e16747
+}
+.social a:hover .fa-dropbox {
+    background-color: #6ba3c5
+}
+.social a:hover .fa-github {
+    background-color: #6c93bb
+}
+.social a:hover .fa-songkick {
+    background-color: #ff3b60
+}
+.social a:hover .fa-posterous {
+    background-color: #efd57c
+}
+.social a:hover .fa-appnet {
+    background-color: #3daad5
+}
+.social a:hover .fa-gplus {
+    background-color: #bc7067
+}
+.social a:hover .fa-stumbleupon {
+    background-color: #f07356
+}
+.social a:hover .fa-lastfm {
+    background-color: #cd443d
+}
+.social a:hover .fa-spotify {
+    background-color: #9acf48
+}
+.social a:hover .fa-instagram {
+    background-color: #926d53
+}
+.social a:hover .fa-evernote {
+    background-color: #9fdc82
+}
+.social a:hover .fa-paypal {
+    background-color: #5b85a8
+}
+.social a:hover .fa-picasa {
+    background-color: #b088c1
+}
+.social a:hover .fa-soundcloud {
+    background-color: #ff8b45
+}
+.social a:hover a:hover i {
+    background-color: #FFF
+}
+.social a:hover i {
+    color: #FFF
+}
+.share-affix {
+    position: fixed;
+    top: 0;
+    left: 0px;
+    z-index: 997;
+    background: #FFF;
+    border: 1px solid rgba(0,0,0,0.1);
+    font-size: 18px;
+}
+.share-icon {
+    display: inline-block;
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+.share-icon:first-child {
+    border-top: 0
+}
+.share-icon:before {
+    font-family: 'fontello'
+}
+.share-affix [class*="icon-s-"] {
+    color: #888
+}
+.share-affix .fa-facebook:hover {
+    color: #677fb5
+}
+.share-affix .fa-twitter:hover {
+    color: #70c2e9
+}
+.share-affix .fa-linkedin:hover {
+    color: #3daccf
+}
+.share-affix .fa-tumblr:hover {
+    color: #829fb9
+}
+.share-affix .fa-digg:hover {
+    color: #507faa
+}
+.share-affix .fa-googleplus:hover {
+    color: #bc7067
+}
+.share-affix .fa-pinterest:hover {
+    color: #d8545d
+}
+.share-affix .fa-posterous:hover {
+    color: #efd57c
+}
+.share-affix .fa-stumbleupon:hover {
+    color: #f07356
+}
+.share-affix .fa-email:hover {
+    color: #45be84
+}
+.navbar .social li a i {
+    color: #fff;
+    background: none;
+    border: 0;
+    height: auto !important;
+    width: auto;
+    font-size: 14px;
+}
+.navbar .social a:hover i {
+    background: none
+}
+.navbar .social a:hover .fa-pinterest {
+    color: #d8545d;
+    border: 0;
+}
+.navbar .social a:hover .fa-rss {
+    color: #faaa5e
+}
+.navbar .social a:hover .fa-facebook {
+    color: #677fb5
+}
+.navbar .social a:hover .fa-twitter {
+    color: #70c2e9
+}
+.navbar .social a:hover .fa-flickr {
+    color: #ff3ba4
+}
+.navbar .social a:hover .fa-dribbble {
+    color: #e299c2
+}
+.navbar .social a:hover .fa-behance {
+    color: #42a9fb
+}
+.navbar .social a:hover .fa-linkedin {
+    color: #3daccf
+}
+.navbar .social a:hover .fa-vimeo {
+    color: #42b5d4
+}
+.navbar .social a:hover .fa-youtube {
+    color: #d5615c
+}
+.navbar .social a:hover .fa-skype {
+    color: #5ecbf3
+}
+.navbar .social a:hover .fa-tumblr {
+    color: #829fb9
+}
+.navbar .social a:hover .fa-delicious {
+    color: #6194dc
+}
+.navbar .social a:hover .fa-500px {
+    color: #3bbbe6
+}
+.navbar .social a:hover .fa-grooveshark {
+    color: #f88e3b
+}
+.navbar .social a:hover .fa-forrst {
+    color: #5f9864
+}
+.navbar .social a:hover .fa-digg {
+    color: #507faa
+}
+.navbar .social a:hover .fa-blogger {
+    color: #fd893f
+}
+.navbar .social a:hover .fa-klout {
+    color: #e16747
+}
+.navbar .social a:hover .fa-dropbox {
+    color: #6ba3c5
+}
+.navbar .social a:hover .fa-github {
+    color: #6c93bb
+}
+.navbar .social a:hover .fa-songkick {
+    color: #ff3b60
+}
+.navbar .social a:hover .fa-posterous {
+    color: #efd57c
+}
+.navbar .social a:hover .fa-appnet {
+    color: #3daad5
+}
+.navbar .social a:hover .fa-gplus {
+    color: #bc7067
+}
+.navbar .social a:hover .fa-stumbleupon {
+    color: #f07356
+}
+.navbar .social a:hover .fa-lastfm {
+    color: #cd443d
+}
+.navbar .social a:hover .fa-spotify {
+    color: #9acf48
+}
+.navbar .social a:hover .fa-instagram {
+    color: #926d53
+}
+.navbar .social a:hover .fa-evernote {
+    color: #9fdc82
+}
+.navbar .social a:hover .fa-paypal {
+    color: #5b85a8
+}
+.navbar .social a:hover .fa-picasa {
+    color: #b088c1
+}
+.navbar .social a:hover .fa-soundcloud {
+    color: #ff8b45
+}
+
+.font-icons {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.font-icons li {
+    display: inline-block;
+    font-size: 25px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+}
+.alert .close {
+    line-height: 28px
+}
+.retina-icons-code i {
+    font-size: 18px
+}
+.retina-icons-code tr td:first-child,
+.retina-icons-code tr th:first-child {
+    text-align: center
+}
+.retina-icons-code code {
+    background: none;
+    white-space: normal;
+}
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background: none !important
+}
+.table-bordered {
+    border-bottom: 1px solid rgba(0,0,0,0.2) !important;
+    border-left: none;
+    background: none;
+}
+.table-bordered th,
+.table-bordered td {
+    border-bottom: 1px solid rgba(0,0,0,0.2) !important
+}
+.retina-icons-code td {
+    vertical-align: middle !important;
+    padding: 20px 10px !important;
+}
+.retina-icons-code th {
+    padding: 20px 10px !important
+}
+.retina-icons-code .table th,
+.retina-icons-code .table td {
+    border-bottom: 1px solid rgba(0,0,0,0.2) !important
+}
+.retina-icons-code .table-bordered>thead>tr>th,
+.retina-icons-code .table-bordered>tbody>tr>th,
+.retina-icons-code .table-bordered>tfoot>tr>th,
+.retina-icons-code .table-bordered>thead>tr>td,
+.retina-icons-code .table-bordered>tbody>tr>td,
+.retina-icons-code .table-bordered>tfoot>tr>td {
+    border: 1px solid rgba(0,0,0,0.2) !important
+}
+.retina-icons-code code {
+    color: inherit
+}
+.budicons-list .font-icons li {
+    font-size: 40px;
+    margin-bottom: 40px;
+    padding: 0 20px;
+}
+.budicons-list .retina-icons-code i {
+    font-size: 30px;
+    line-height: 1;
+    margin-top: 5px;
+    display: block;
+}
+.flats {
+    margin-bottom: -50px
+}
+.flats .col-sm-2 {
+    height: 160px
+}
+.flats img {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100px;
+    height: auto;
+}

@@ -1,0 +1,31 @@
+{{ "<!-- ABOUT -->" | safeHTML }}
+<div class="section scrollspy">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m6 l6">
+                <h2 class="header text_b">{{ with .Site.Params.About.Headline }}{{ . }}{{ end }}</h2>
+                <p class="text-grey text-darken-3 justify flow-text">{{ with .Site.Params.About.Lead }}{{ . }}{{ end }}</p>
+                <p  class="light justify flow-text">
+                    {{ .Site.Params.About.Description | markdownify }}
+                </p>
+            </div>
+            <div class="col s12 m5 l5 offset-l1 offset-m1">
+                <h2 class="header text_b">{{ with .Site.Params.About.ProgressTitle }}{{ . }}{{ end }}</h2>
+                <ul class="progress-list">
+                    {{ range .Site.Params.About.Progress }}
+                    <li>
+                        <p>{{ .Name }} <em>{{ .Percent }}%</em></p>
+                        <div class="progress plain">
+                            <div class="bar" style="width: {{ .Percent }}%;"></div>
+                        </div>
+                    </li>
+                    {{ end }}
+                </ul>
+                <!-- /.progress-list -->
+            </div>
+            <!--/column -->
+        </div>
+        <!--/.row -->
+    </div>
+    <!--/.container -->
+</div>

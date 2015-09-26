@@ -1,0 +1,165 @@
+/*-----------------------------------------------------------------------------------*/
+/*	01. BLOG
+/*-----------------------------------------------------------------------------------*/
+.classic-view figure,
+.grid-view figure {
+    margin-bottom: 20px
+}
+.grid-view hr {
+    padding-top: 20px;
+    margin-bottom: 50px;
+}
+.pagination {
+    display: block;
+    margin: 0;
+}
+.pagination ul {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.pagination ul > li {
+    display: inline-block
+}
+.pagination ul > li > a,
+.pagination ul > li > span {
+    float: none
+}
+.pagination ul > .active > a span {
+    border-bottom: 1px solid #FFF;
+    padding-bottom: 1px;
+}
+.pagination ul > li:first-child > a,
+.pagination ul > li:last-child > a {
+
+}
+.pagination ul > li > a:hover,
+.pagination ul > li > a:focus,
+.pagination ul > .active > a,
+.pagination ul > .active > span {
+
+}
+.about-author {
+    position: relative;
+    padding: 0 0 0 180px;
+}
+.about-author .author-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.post.box {
+    margin-bottom: 30px
+}
+.format-chat ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.format-chat ul li strong {
+    text-transform: uppercase;
+    color: #434343;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding-right: 5px;
+    font-family: 'Montserrat', sans-serif;
+}
+.format-link .post-title a:after {
+    display: inline-block;
+    content: "→";
+    padding-left: 10px;
+}
+.classic-view .post-title {
+    margin-bottom: 5px;
+    line-height: 20px;
+}
+/*-----------------------------------------------------------------------------------*/
+/* 	02. WIDGETS
+/*-----------------------------------------------------------------------------------*/
+.sidebox {
+    margin-top: 50px;
+    display: block;
+}
+.sidebox:first-child {
+    margin-top: 0
+}
+.sidebox a {
+    color: inherit
+}
+.sidebox a:hover {
+    color: #45be84
+}
+.sidebar {
+    padding-left: 35px !important
+}
+.widget-title {
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 15px !important;
+}
+.widget .post-list {
+    padding: 0;
+    margin: 0;
+}
+.widget .post-list:after {
+    content: '';
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.widget .post-list li {
+    clear: both;
+    margin-bottom: 15px;
+    display: block;
+    overflow: hidden;
+}
+.widget .post-list h5 {
+    margin: 0;
+    color: inherit;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: normal;
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+.widget .post-list h5 a {
+    color: #757575;
+    font-size: 15px !important;
+    line-height: 18px;
+    text-transform: none !important;
+}
+.widget .post-list h5 a:hover {
+    color: #45be84
+}
+footer .widget .post-list h5 a {
+    color: #ececec
+}
+.widget .post-list .icon-overlay {
+    float: left;
+    width: 70px;
+    height: 70px;
+}
+.sidebar .widget .post-list .meta {
+    margin-left: 85px;
+    margin-bottom: 0;
+}
+.widget .post-list .meta em {
+    color: #9a9a9a;
+    font-weight: 500;
+    margin-bottom: 10px;
+    font-style: normal;
+}
+.widget .post-list .meta em a {
+    color: #9a9a9a
+}
+.widget .post-list .meta em a:hover {
+    color: #45be84
+}
+.widget .list {
+    list-style: none;
+    margin: 0;
+}

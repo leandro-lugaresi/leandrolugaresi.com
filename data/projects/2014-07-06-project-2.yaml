@@ -1,0 +1,8 @@
+modalID: 2
+title: Alice Fixtures Module (Em desenvolvimento)
+date: 2015-05-20
+img: alice.png
+client: Open Source
+clientLink: "https://github.com/leandro-lugaresi/AliceFixturesModule"
+category: Web Development
+description: Módulo de integração entre o projeto [alice](https://github.com/nelmio/alice) e o Zend Framework 2. Possibilita carregar datafixtures em testes unitários e através do console da aplicação. Para saber mais leia o [README](https://github.com/leandro-lugaresi/AliceFixturesModule#usages) do projeto!

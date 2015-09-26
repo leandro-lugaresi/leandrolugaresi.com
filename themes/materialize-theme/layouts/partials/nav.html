@@ -1,0 +1,45 @@
+{{ "<!-- NAVIGATION -->" | safeHTML }}
+<div class="navbar-fixed">
+    <nav id="nav_f" class="" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="#" class="brand-logo">{{ .Site.Params.Brand }}</a>
+            <ul class="right hide-on-med-and-down">
+            {{ $currentNode := . }}
+
+            {{ range .Site.Menus.main }}
+                {{ if .HasChildren }}
+                    <li class="{{if $currentNode.HasMenuCurrent "main" . }} active{{end}}">
+                        <a href="#!" data-activates="dropdown-{{ .Identifier }}">{{ .Pre }}{{ .Name }}{{ .Post }}</a>
+                        <ul id="dropdown-{{ .Identifier }}" class="dropdown-content">
+                            {{ range .Children }}
+                            <li><a href="#!">{{ .Pre }}{{ .Name }}{{ .Post }}</a></li>
+                            {{ end }}
+                        </ul>
+                    </li>
+                {{else}}
+                    <li class="{{if $currentNode.HasMenuCurrent "main" . }} active{{end}}"><a href="{{ .URL }}">{{ .Pre }}{{ .Name }}{{ .Post }}</a></li>
+                {{end}}
+            {{end}}
+            </ul>
+
+            <ul id="nav-mobile" class="side-nav">
+                {{ $currentNode := . }}
+                {{ range .Site.Menus.main }}
+                    {{ if .HasChildren }}
+                        <li class="{{if $currentNode.HasMenuCurrent "main" . }} active{{end}}">
+                            <a href="#!" data-activates="dropdown-{{ .Identifier }}">{{ .Pre }}{{ .Name }}{{ .Post }}</a>
+                            <ul id="dropdown-{{ .Identifier }}" class="dropdown-content">
+                                {{ range .Children }}
+                                <li><a href="#!">{{ .Pre }}{{ .Name }}{{ .Post }}</a></li>
+                                {{ end }}
+                            </ul>
+                        </li>
+                    {{else}}
+                        <li class="{{if $currentNode.HasMenuCurrent "main" . }} active{{end}}"><a href="{{ .URL }}">{{ .Pre }}{{ .Name }}{{ .Post }}</a></li>
+                    {{end}}
+                {{end}}
+                </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+</div>

@@ -1,0 +1,21 @@
+<article class="post box format-standard">
+    <div class="post-content">
+        <h2 class="post-title"><a href="{{ .Permalink }}">{{ .Title }} {{ if .Draft }}:: DRAFT{{end}}</a></h2>
+        <div class="meta">
+            <span class="date"><a class="link-effect" href="#">{{ .Date.Format "Mon, Jan 2, 2006" }}</a></span>
+            <span class="category">
+                <a class="link-effect" href="#">Journal</a>,
+                <a class="link-effect" href="#">Daily</a>
+            </span>
+            <span class="comments">
+                <a class="link-effect" href="#"><i class="fa fa-comments-o"></i> 7</a>
+            </span>
+        </div>
+        <!-- /.meta -->
+        <p>
+            {{ .Summary }}
+        </p>
+        <a class="more link-effect" href="{{ .Permalink }}">Read More »</a>
+    </div>
+  <!-- /.post-content -->
+</article>

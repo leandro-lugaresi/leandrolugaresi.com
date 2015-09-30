@@ -11,12 +11,17 @@ menu:
       # Pre: "<i class='fa fa-heart'></i>"
       Weight: -110
       Identifier: "home"
-      URL: "/about/"
+      URL: "/"
     -
-      Name: "getting started"
+      Name: "Serviços"
       # Pre: "<i class='fa fa-road'></i>"
       Weight: -100
-      URL: "/getting-started/"
+      URL: "/#services"
+    -
+      Name: "Sobre mim"
+      # Pre: "<i class='fa fa-road'></i>"
+      Weight: -100
+      URL: "/#about"
 params:
   AuthorName: "Leandro Lugaresi"
   GitHubUser: "leandro-lugaresi"

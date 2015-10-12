@@ -361,3 +361,201 @@ footer.page-footer {
         font-size: 1.488rem;
     }
 }
+
+/*-----------------------------------------------------------------------------------*/
+/*	05. POST LISTING
+/*-----------------------------------------------------------------------------------*/
+.blog .post-listing .post:nth-child(1), .blog .post-listing .post:nth-child(2) {
+    float: left;
+    padding: 0.5em 0;
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .blog .post-listing .post:nth-child(1), .blog .post-listing .post:nth-child(2) {
+        padding: 0.5em;
+        width: 50%;
+    }
+}
+.overview .post-listing .post:nth-child(1), .overview .post-listing .post:nth-child(2) {
+    float: left;
+    padding: 0.5em;
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .overview .post-listing .post:nth-child(1), .overview .post-listing .post:nth-child(2) {
+        width: 50%;
+    }
+    .overview .post-listing .post:nth-child(1) .card-image a.tag, .overview .post-listing .post:nth-child(2) .card-image a.tag {
+        font-size: 21px;
+    }
+}
+.overview .post-listing .post:nth-child(3) {
+    padding: 0.5em;
+    width: 100%;
+}
+.overview .post-listing .post:nth-child(3) .card-image {
+    height: auto;
+}
+@media (min-width: 768px) {
+    .overview .post-listing .post:nth-child(3) .card-image {
+        height: 300px;
+    }
+}
+.overview .post-listing .post:nth-child(3) .card-image a.tag {
+    font-size: 18px;
+}
+
+.post-listing .post {
+    float: left;
+    padding: 0.5em;
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .post-listing .post:nth-child(1) .card .card-content .card-title, .post-listing .post:nth-child(2) .card .card-content .card-title {
+        font-size: 1.625em;
+    }
+}
+@media (min-width: 768px) {
+    .post-listing .post:nth-child(1) .card-image a.tag, .post-listing .post:nth-child(2) .card-image a.tag {
+        font-size: 21px;
+    }
+}
+.post-listing .post .card .activator {
+    cursor: pointer;
+}
+.post-listing .post .card .card-content {
+    background: #fafafa none repeat scroll 0 0;
+    height: 115px;
+    overflow: hidden;
+    padding: 15px;
+    position: relative;
+}
+.post-listing .post .card .card-content::after {
+    background: rgba(0, 0, 0, 0) -moz-linear-gradient(center top , rgba(250, 250, 250, 0), #fafafa) repeat scroll 0 0;
+    bottom: 0;
+    content: "";
+    height: 90px;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    width: 100%;
+    z-index: 10;
+}
+.post-listing .post .card .card-content .card-title {
+    display: block;
+    font-size: 1.425em;
+    line-height: 1.625;
+    position: relative;
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .post-listing .post .card .card-content .card-title {
+        font-size: 1.625em;
+    }
+}
+.post-listing .post .card .card-content .card-title a {
+    display: block;
+    width: 100%;
+}
+.post-listing .post .card .card-content .card-title .truncate {
+    max-width: 90%;
+}
+.post-listing .post .card .card-content .card-title i:hover, .post-listing .post .card .card-content .card-title i:active, .post-listing .post .card .card-content .card-title i:focus {
+    color: #1fa5da;
+}
+.post-listing .post .card .card-action {
+    background: #fff none repeat scroll 0 0;
+    position: relative;
+    z-index: 11;
+}
+.post-listing .post .card .card-action .btn-primary {
+    color: #fff;
+    margin-right: 0;
+    position: absolute;
+    right: 25px;
+    top: -30px;
+    transition: all 0.3s ease 0s;
+    z-index: 2;
+}
+.post-listing .post .card .card-action .author-link {
+    display: inline-block;
+    vertical-align: middle;
+}
+.post-listing .post .card .card-action .author-link .hs-author-avatar {
+    display: inline-block;
+    margin-right: 0.25em;
+    vertical-align: middle;
+}
+.post-listing .post .card .card-action .author-link .author {
+    display: none;
+    max-width: 100px;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+@media (min-width: 768px) {
+    .post-listing .post .card .card-action .author-link .author {
+        display: inline-block;
+    }
+}
+.post-listing .post .card .card-action .author-link img {
+    display: block;
+    height: 32px;
+    width: 32px;
+}
+.post-listing .post .card .card-action .byline {
+    max-width: 80%;
+    vertical-align: middle;
+}
+.post-listing .post .card .card-action a {
+    color: #47b8e5;
+    margin-right: 0.25em;
+    text-transform: inherit;
+}
+.post-listing .post .card .card-image a.tag {
+    background-color: rgba(59, 66, 80, 0.8);
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 18px;
+    padding: 0.25em 0.75em;
+}
+.post-listing .post .card .card-image img {
+    display: block;
+}
+.post-listing .post .card .card-image a {
+    display: block;
+}
+.post-listing .post .card .card-image a .card-image-bg {
+    background-position: center center;
+    background-size: cover;
+    height: 300px;
+}
+.post-listing .post .card ul.hs-blog-social-share-list {
+    line-height: 1;
+}
+.post-listing .post .card ul.hs-blog-social-share-list li {
+    height: 25px;
+    line-height: 1;
+    margin: 0.5em 0.5em 0.5em 0;
+}
+@media (min-width: 768px) {
+    .post-listing .post {
+        width: 33.33%;
+    }
+    .post-listing .post:only-child {
+        padding: 0.5em 0;
+        width: 50%;
+    }
+}
+.single-post > .card {
+    padding: 1.5em;
+    position: relative;
+}
+.center {
+    display: inline-block;
+    margin: 0 auto;
+}
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

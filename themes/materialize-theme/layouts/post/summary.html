@@ -1,21 +1,36 @@
-<article class="post box format-standard">
-    <div class="post-content">
-        <h2 class="post-title"><a href="{{ .Permalink }}">{{ .Title }} {{ if .Draft }}:: DRAFT{{end}}</a></h2>
-        <div class="meta">
-            <span class="date"><a class="link-effect" href="#">{{ .Date.Format "Mon, Jan 2, 2006" }}</a></span>
-            <span class="category">
-                <a class="link-effect" href="#">Journal</a>,
-                <a class="link-effect" href="#">Daily</a>
-            </span>
-            <span class="comments">
-                <a class="link-effect" href="#"><i class="fa fa-comments-o"></i> 7</a>
+<div class="post">
+    <div class="card">
+
+        <div class="card-image waves-effect waves-block waves-light">
+            {{ with .Params.categories }}
+            {{ range first 1 . }}
+            <div class="absolute-top-right">
+                <a href="/categories/{{ . | urlize }}" class="margined-left right btn btn-primary btn-raised tag topic-name">{{ . }}</a>
+            </div>
+            {{ end }}
+            {{ end }}
+            <a href="{{ .Permalink }}">
+                <div style="background-image:url('{{ .Site.BaseURL }}{{ .Params.image }}');" class="card-image-bg"></div>
+            </a>
+        </div>
+
+        <div class="card-content">
+            <span class="card-title grey-text text-darken-4">
+                <i class="activator material-icons right">more_vert</i>
+                <a href="{{ .Permalink }}">
+                    <span class="">{{ .Title }} {{ if .Draft }}:: DRAFT{{end}}</span>
+                </a>
             </span>
         </div>
-        <!-- /.meta -->
-        <p>
-            {{ .Summary }}
-        </p>
-        <a class="more link-effect" href="{{ .Permalink }}">Read More »</a>
+        <div class="card-action">
+            <span class="center byline truncate">{{ .Date.Format "January 2, 2006" }}{{ with .Params.tags }} in  {{ range first 2 . }}<a href="/tags/{{ . | urlize }}" class="topic-name">{{ . }}</a> {{ end }}{{ end }}</span>
+            <a href="{{ .Permalink }}" class="btn btn-large btn-primary waves-effect">Read More</a>
+        </div>
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">{{ .Title }}<i class="material-icons right">close</i></span>
+            <p>
+                {{ .Summary }}
+            </p>
+        </div>
     </div>
-  <!-- /.post-content -->
-</article>
+</div>

@@ -559,3 +559,15 @@ footer.page-footer {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.padded {
+    padding: 10px;
+}
+.padded-5 {
+    padding: 5px;
+}
+.padded-20 {
+    padding: 20px;
+}
+.full {
+    width: 100%;
+}

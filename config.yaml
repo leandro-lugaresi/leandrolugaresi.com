@@ -4,7 +4,8 @@ LanguageCode: "pt_br"
 Title: "Leandro Lugaresi"
 Footnotereturnlinkcontents: "↩"
 Theme: "materialize-theme"
-taxonomies:
+Paginate: 5
+Taxonomies:
   tag: "tags"
   category: "categories"
 menu:

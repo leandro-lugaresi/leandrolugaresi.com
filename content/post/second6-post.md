@@ -1,8 +1,9 @@
 +++
 date = "2015-07-29T21:52:13-03:00"
 draft = false
-image = "img/portfolio/5.jpg"
-title = "teste"
+image = "img/portfolio/modulus.jpg"
+categories = [ "php", "teste"]
+title = "teste com um titulo maio! wololo wololo"
 tooltip = ""
 inverted = true
 

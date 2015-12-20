@@ -1,5 +1,5 @@
 ---
-BaseUrl: "http://localhost:1313"
+BaseUrl: "/"
 LanguageCode: "pt_br"
 Title: "Leandro Lugaresi"
 Footnotereturnlinkcontents: "↩"

@@ -26,10 +26,17 @@ menu:
       # Pre: "<i class='fa fa-road'></i>"
       Weight: -100
       URL: "/#about"
+    -
+      Name: "Postagens"
+      # Pre: "<i class='fa fa-road'></i>"
+      URL: "/post/"
 params:
   AuthorName: "Leandro Lugaresi"
+  AuthorGravatar: "http://www.gravatar.com/avatar/bd675b6412658f937a3c82f5fbd36821"
+  disqusShortname: "leandrolugaresi"
+  AddThis: "ra-55d7c2c70d1f4a44"
   GitHubUser: "leandro-lugaresi"
-  Description: "Software Engineer - PHP (Zend Framework2), Elixir and Golang padawan"
+  Description: "PHP developer, Elixir and Golang padawan"
   Brand: "Leandro Lugaresi"
   Home:
     Headline: "Desenvolvimento"

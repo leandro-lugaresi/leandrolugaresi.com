@@ -1,80 +1,78 @@
 <!DOCTYPE html>
 <html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
-    <head>
-        {{ partial "head.html" . }}
-    </head>
-    <body id="page-top">
+<head>
+    {{ partial "head.html" . }}
+    {{ partial "addthis.html" . }}
+</head>
+<body id="top" class="scrollspy">
+    <!-- Pre Loader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
 
-        {{ partial "nav.html" . }}
-        {{ "<!-- HEADER -->" | safeHTML }}
-        <header style="background-image: url(../img/header.jpg)">
-            <div class="header-content">
-                <div class="header-content-inner">
-                    <h1>{{ with .Site.Params.hero.slogan }}{{ . }}{{ end }}</h1>
-                    <hr>
-                    <p>{{ with .Site.Params.hero.subtitle }}{{ . | markdownify }}{{ end }}</p>
-                    <a href="#about" class="btn btn-radius btn-primary btn-xl page-scroll">{{ with .Site.Params.hero.buttonText }}{{ . }}{{ end }}</a>
-                </div>
-            </div>
-        </header>
-        <section>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+
+    </div>
+    {{ partial "nav.html" . }}
+    {{ with .Params.image }}
+    <div class="parallax-container valign-wrapper">
+        <div class="section no-pad-bot">
             <div class="container">
-                <div class="col-sm-8 blog-content">
-                    <div class="blog-posts text-boxes">
-                        <div class="post box format-image">
-                            <figure class="main"><img alt="" src="img/portfolio/3.jpg"></figure>
-                            <div class="post-content">
-                                <h1 class="post-title">Etiam porta sem malesuada magna mollis euismod</h1>
-                                <div class="meta"><span class="date"><a class="link-effect" href="#">14 June 2013</a></span> <span class="category"><a class="link-effect" href="#">Journal</a>, <a class="link-effect" href="#">Photography</a>, <a class="link-effect" href="#">Web Design</a></span> <span class="comments"><a class="link-effect" href="#"><i class="icon-chat-1"></i> 5</a></span></div>
-                                <!-- /.meta -->
-
-                                <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur. Curabitur blandit tempus porttitor. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                                <p>Donec sed odio dui <a class="link-effect" href="#">consectetur adipiscing</a> elit. Etiam adipiscing tincidunt elit, eu convallis felis suscipit ut. Phasellus rhoncus tincidunt auctor. Nullam eu sagittis mauris. Donec non dolor ac elit aliquam tincidunt at at sapien. Aenean tortor libero, condimentum ac laoreet vitae, varius tempor nisi. Duis non arcu vel lectus. </p>
-                                <ul class="circled">
-                                    <li>Mauris lacinia dui non metus dignissim venenatis.</li>
-                                    <li>Etiam elit tellus, condimentum tempor lobortis non.</li>
-                                    <li>Aliquam pharetra vestibulum arcu, eget iaculis. </li>
-                                </ul>
-                                <div class="divide30"></div>
-                                <h3>Pellentesque Euismod Amet</h3>
-                                <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna vel.</p>
-
-                                <p> Mauris convallis, sapien id ultricies aliquet, mi nisi congue dui, id laoreet ligula ante vitae ligula. Duis lectus magna, cursus in molestie eget, cursus eget quam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi ullamcorper laoreet metus, eu commodo diam cursus et. Nam eleifend aliquam augue, id condimentum erat vehicula vel. Donec sed odio dui. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Vivamus sagittis lacus vel augue laoreet.</p>
-                                <div class="divide30"></div>
-                                <h3>Sit Vulputate Bibendum Purus</h3>
-                                <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                                <p>Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Nullam id dolor id nibh ultricies vehicula ut id elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Donec sed odio dui. Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum. Cras mattis consectetur purus sit amet fermentum. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Vestibulum id ligula porta felis euismod semper. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
-                                <div class="meta tags"><a class="link-effect" href="#">journal</a>, <a class="link-effect" href="#">illustration</a>, <a class="link-effect" href="#">design</a>, <a class="link-effect" href="#">daily</a></div>
-                            </div>
-                            <!-- /.post-content -->
-                        </div>
-                        <!-- /.post .format-image -->
-
-                    </div>
-                    <!-- /.blog-posts -->
-
-                    <div class="box">
-                        <div class="about-author">
-                            <div class="author-image"> <img src="style/images/art/author.jpg" alt=""> </div>
-                            <h3>About the Author</h3>
-                            <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Maecenas faucibus mollis interdum. Fusce dapibus, tellus ac cursus commodo.</p>
-                            <ul class="social">
-                                <li><a href="#"><i class="icon-s-twitter"></i></a></li>
-                                <li><a href="#"><i class="icon-s-facebook"></i></a></li>
-                                <li><a href="#"><i class="icon-s-pinterest"></i></a></li>
-                                <li><a href="#"><i class="icon-s-dribbble"></i></a></li>
-                                <li><a href="#"><i class="icon-s-linkedin"></i></a></li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <!-- /.box -->
-                    {{ partial "disqus.html" }}
+                <div class="row center">
                 </div>
-                <!-- /.box -->
             </div>
-        </section>
+        </div>
+        <div class="parallax"><img src="{{ . }}" alt=""></div>
+    </div>
+    {{ end }}
+    <div class="main-content full blog">
+        <div class="content">
+            <div class="sections">
+                <div class="container">
+                    <div class="row">
+                        <div class="single-post">
+                            <div class="card">
+                                <div class="post-wrapper">
+                                    <h1 class="center header text_h2">{{ .Title }}</h1>
+                                    <p>
+                                        <span class="center">
+                                        {{ .Date.Format "January 2, 2006" }}
+                                        {{ with .Params.categories }}
+                                        {{ range first 1 . }}
+                                        in <a href="/categories/{{ . | urlize }}" class="topic-name">{{ . }}</a>
+                                        {{ end }}
+                                        {{ end }}
+                                        {{ with .Params.tags }} Tags: {{ range first 5 . }}<a href="/tags/{{ . | urlize }}" class="topic-name">{{ . }}</a> {{ end }}{{ end }}
+                                        </span>
+                                        <div class="addthis_sharing_toolbox"></div>
+                                    </p>
+                                    <div class="post flow-text">
+                                        {{ .Content }}
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s5 m2">
+                                            <img src="{{ .Site.Params.AuthorGravatar }}?s=90" alt="{{ .Site.Params.AuthorName }}" class="responsive-img circle">
+                                        </div>
+                                        <div class="col s7 m9 author-description">
+                                            <p><b>{{ .Site.Params.AuthorName }}</b></p>
+                                            <p>{{ .Site.Params.Description }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end-post-wrapper-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divide30"></div>
+                    <div class="box">
+                        {{ partial "disqus.html" . }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ partial "footer.html" . }}
+    {{ partial "js.html" .}}
 
-        {{ partial "js.html" . }}
-    </body>
+  </body>
 </html>

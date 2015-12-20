@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
+<head>
+    {{ partial "head.html" . }}
+</head>
+<body id="top" class="scrollspy">
+    <!-- Pre Loader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+
+    </div>
+    {{ partial "nav.html" . }}
+    <div id="blog" class="blog section scrollspy">
+        <div class="container">
+            <div class="row">
+                <div class="post-listing">
+                    {{ $paginator := .Paginate (.Data.Pages.ByPublishDate) }}
+                    {{ range $paginator.Pages }}
+                       {{ .Render "summary"}}
+                    {{ end }}
+                </div>
+                {{ partial "pagination.html" . }}
+            </div>
+        </div>
+    </div>
+    {{ partial "footer.html" . }}
+    {{ partial "js.html" .}}
+
+  </body>
+</html>

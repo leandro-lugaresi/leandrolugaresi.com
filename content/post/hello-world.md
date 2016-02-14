@@ -2,7 +2,7 @@
 categories = ["blog", "pt-br"]
 date = "2016-02-13T19:54:17-02:00"
 draft = false
-image = "/img/posts/hello-world.jpg"
+image = "img/posts/hello-world.jpg"
 tags = []
 title = "hello world! I`m back"
 

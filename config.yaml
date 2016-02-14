@@ -5,6 +5,7 @@ Title: "Leandro Lugaresi"
 Footnotereturnlinkcontents: "↩"
 Theme: "materialize-theme"
 Paginate: 5
+googleAnalytics: "UA-21355444-1"
 Taxonomies:
   tag: "tags"
   category: "categories"
@@ -35,7 +36,6 @@ params:
   AuthorGravatar: "http://www.gravatar.com/avatar/bd675b6412658f937a3c82f5fbd36821"
   disqusShortname: "leandrolugaresi"
   AddThis: "ra-55d7c2c70d1f4a44"
-  GoogleAnalytics: "UA-21355444-1"
   GitHubUser: "leandro-lugaresi"
   Description: "PHP developer, Elixir and Golang padawan"
   Brand: "Leandro Lugaresi"

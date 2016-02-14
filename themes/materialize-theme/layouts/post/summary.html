@@ -10,7 +10,7 @@
             {{ end }}
             {{ end }}
             <a href="{{ .Permalink }}">
-                <div style="background-image:url('{{ .Site.BaseURL }}{{ .Params.image }}');" class="card-image-bg"></div>
+                <div style="background-image:url('{{ .Params.image | absURL }}');" class="card-image-bg"></div>
             </a>
         </div>
 

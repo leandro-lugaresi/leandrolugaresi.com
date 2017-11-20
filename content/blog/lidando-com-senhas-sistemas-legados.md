@@ -8,8 +8,6 @@ title = "Como lidar com senhas inseguras em projetos legados"
 
 +++
 
-# Como lidar com senhas inseguras em projetos legados
-
 Aqui na [Coderockr](http://coderockr.com/) nós eventualmente nos deparamos com sistemas legados e muitas vezes inseguros. Um dos problemas mais comuns é a utilização de funções hash como MD5, SHA1, SHA-256 em senhas. O uso dessas funções apresenta alguns riscos que as aplicações não deveriam estar correndo, mas antes de abordar as soluções, vamos ver porque o uso deses algoritmos de hash representam um risco de segurança.
 Por que funções hash não devem ser usadas em senhas?
 Basicamente funções hash foram criadas para verificar a integridade de dados de forma eficiente e no menor tempo possível, sendo um grande problema quando estamos lidando com senhas pois não fornecem nenhuma defesa contra ataques de força bruta.

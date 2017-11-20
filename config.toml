@@ -1,0 +1,54 @@
+title = "Go developer"
+baseurl = "https://leandrolugaresi.com.br/"
+languageCode = "en-us"
+enableRobotsTXT = true
+tags = ["portfolio", "web design", "blog"]
+config = "config.toml"
+theme = "osprey"
+# theme = "gohugo-amp"
+canonifyURLS = true
+disqusShortname = "tomanistor"
+disableKinds = ["taxonomy", "taxonomyTerm"] # This theme does not currently use "tag" and "category" taxonomies
+
+
+[params]
+    author = "Leandro Lugaresi"
+    gravatar = "http://www.gravatar.com/avatar/bd675b6412658f937a3c82f5fbd36821"
+    disqusShortname = "leandrolugaresi"
+    addThis = "ra-55d7c2c70d1f4a44"
+    description = "PHP developer, Elixir and Golang padawan"
+    brand = "Leandro Lugaresi"
+    tagline = "Osprey Example Site"
+    logoBig = "/images/osprey-logo.png"
+    logoSmall = "/images/osprey-logo.png"
+    favicon = "favicon.ico"
+    opengraphImage = "/images/osprey.png"
+    twitter = "leandrolugaresi"
+    linkedin = "leandrolugaresi"
+    github = "leandro-lugaresi"
+    email = "leandrolugaresi92@gmail.com"
+    googleTagManager = ""
+    highlightJS = true
+    copyright = true
+    credit = true
+    customCSS = false
+    cacheBustCSS = false
+    cacheBustJS = false
+    ajaxFormspree = true
+
+[[menu.main]]
+    name = "About"
+    url  = "/#about"
+    weight = 1
+[[menu.main]]
+    name = "Work"
+    url  = "/#work"
+    weight = 2
+[[menu.main]]
+    name = "Blog"
+    url  = "/#blog"
+    weight = 3
+[[menu.main]]
+    name = "Contact"
+    url  = "/#contact"
+    weight = 4

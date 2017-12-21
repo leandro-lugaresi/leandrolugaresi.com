@@ -1,0 +1,5 @@
+{{ if .IsNamedParams }}
+<script async class='speakerdeck-embed' data-id='{{ .Get "id" }}' data-ratio='{{ .Get "ratio" }}' src='//speakerdeck.com/assets/embed.js'></script>
+{{ else }}
+<script async class='speakerdeck-embed' data-id='{{ index .Params 0 }}' data-ratio='1.33333333333333' src='//speakerdeck.com/assets/embed.js'></script>
+{{ end }}

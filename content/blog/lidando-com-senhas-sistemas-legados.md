@@ -1,14 +1,18 @@
 +++
-categories = ["blog", "pt-br", "security"]
-date = "2017-05-08T12:54:17-02:00"
-draft = false
-image = "img/posts/password.jpg"
-tags = ["password", "php", "coderockr"]
+author = "Leandro Lugaresi"
+categories = ["pt-br", "security"]
+date = "2017-05-08"
+description = ""
+featured = "password.jpg"
+featuredalt = "Password cracking"
+featuredpath = "date"
+linktitle = "Como lidar com senhas inseguras em projetos legados"
 title = "Como lidar com senhas inseguras em projetos legados"
+type = "post"
+tags = ["password", "php", "coderockr"]
 
 +++
 
-# Como lidar com senhas inseguras em projetos legados
 
 Aqui na [Coderockr](http://coderockr.com/) nós eventualmente nos deparamos com sistemas legados e muitas vezes inseguros. Um dos problemas mais comuns é a utilização de funções hash como MD5, SHA1, SHA-256 em senhas. O uso dessas funções apresenta alguns riscos que as aplicações não deveriam estar correndo, mas antes de abordar as soluções, vamos ver porque o uso deses algoritmos de hash representam um risco de segurança.
 Por que funções hash não devem ser usadas em senhas?

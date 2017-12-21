@@ -1,10 +1,14 @@
 +++
-categories = ["blog", "pt-br"]
-date = "2016-02-13T19:54:17-02:00"
-draft = false
-image = "img/posts/hello-world.jpg"
-tags = []
-title = "hello world! I`m back"
+author = "Leandro Lugaresi"
+categories = ["pt-br"]
+date = "2016-02-13"
+description = ""
+featured = "hello-world.jpg"
+featuredalt = "Hello World"
+featuredpath = "date"
+linktitle = ""
+title = "Hello World! I'm back"
+type = "post"
 
 +++
 

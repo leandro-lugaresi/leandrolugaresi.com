@@ -1,0 +1,128 @@
+baseurl = "/"
+languageCode = "en-us"
+title = "Leandro Lugaresi"
+theme = "hugo-future-imperfect"
+preserveTaxonomyNames = true
+paginate = 5
+disqusShortname = "leandrolugaresi"
+googleAnalytics = "UA-21355444-1"
+pluralizeListTitles = false
+
+[params]
+  # Sets the meta tag description
+  description          = "Leandro is a software developer based in Joinville, Brazil. Love Go and hate CRUDs applications. Event Sourcing enthusiast."
+  # Sets the navbarTitle that appears in the top left of the navigation bar
+  navbarTitle          = "Leandro Lugaresi"
+  # Sets where "View More Posts" links
+  viewMorePostLink     = "/blog/"
+
+# Optional Params
+  # Sets navbarTitle to match the section of the website
+  dynamicTitles        = true
+  # Sets RSS icons to appear on the sidebar with the social media buttons
+  rssAppearAtTop       = true
+  rssAppearAtBottom    = true
+  # Sets Social Media icons to appear on the sidebar
+  socialAppearAtTop    = true
+  socialAppearAtBottom = true
+  # Sets Categories to sort by number of posts instead of alphabetical
+  categoriesByCount    = true
+  # Sets Estimated Reading Time to appear in post headers
+  includeReadingTime   = true
+  # Sets the Favicon and Version for the site. Default support is for
+  # apple-touch-icon-precomposed.png, favicon.png, favicon.ico, and mstile.png.
+  # These are stored in the favicon folder. See the following for more information:
+  # https://github.com/audreyr/favicon-cheat-sheet
+  loadFavicon          = false
+  faviconVersion       = ""
+  # Sets Social Share links to appear on posts
+  socialShare          = false
+  # Load custom CSS or JavaScript files. The variable is an array so that you
+  # can load multiple files if necessary. You can also load the standard theme
+  # files by adding the value, "default".
+  # customCSS            = ["default", "/path/to/file"]
+  # customJS             = ["default", "/path/to/file"]
+  customCSS            = ["default", "/css/custom.css"]
+  customJS             = ["default"]
+
+# Disqus will take priority over Staticman (github.com/eduardoboucas/staticman)
+# due to its ease of use. Feel free to check out both and decide what you would
+# prefer to use. See Staticman.yml for additional settings.
+[params.staticman]
+  # Sets Statiman to be active
+  staticman = false
+[params.intro]
+  header    = "Leandro Lugaresi"
+
+  paragraph = "A software developer in love with:</br> GO | storage engines | event-sourcing."
+
+  about     = """
+    Leandro is a software developer based in Joinville, Brazil. He currently works as a software engineer for <a href=\"http://coderockr.com/\">Coderockr</a>.
+    He is interested in programming languages, storage engines, and event sourcing.</br></br>
+    He worked with PHP, mostly in nasty and legacy code for 3 years and on last 2 years he is studying and working with GO.
+    """
+
+  # This appears at the top of the sidebar above params.intro.header.
+  # A width of less than 100px is recommended from a design perspective.
+  [params.intro.pic]
+    src       = "/img/main/perfil.jpg"
+    # Sets Image to be a cirlce
+    circle    = false
+    # Sets Image to be Future Imperfect's hexagon
+    imperfect = true
+    width     = ""
+    alt       = "Leandro Lugaresi"
+
+[params.postAmount]
+# Sets the number of recent posts to show in the sidebar. The default value is 5.
+    sidebar = 5
+
+# Sets the menu items in the navigation bar
+# Identifier prepends a Font Awesome icon to the menu item
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  identifier = "fa fa-home"
+  weight = 1
+
+[[menu.main]]
+  name = "About"
+  url = "/about/"
+  identifier = "fa fa-id-card-o"
+  weight = 2
+
+[[menu.main]]
+  name = "Blog"
+  url = "/blog/"
+  identifier = "fa fa-newspaper-o"
+  weight = 3
+
+[[menu.main]]
+  name = "Talks and projects"
+  url = "/itemized/"
+  identifier = "fa fa-list"
+  weight = 4
+
+[[menu.main]]
+  name = "Contact"
+  url = "/contact/"
+  identifier = "fa fa-envelope-o"
+  weight = 6
+
+# Sets Social Media icons to appear and link to your account. Value should be your
+# username unless otherwise noted. These are the icons affected by socialAppearAtTop
+# and socialAppearAtBottom.
+[social]
+  # Coding Communities
+  github          = "leandro-lugaresi"
+  gitlab          = "leandro-lugaresi"
+  # Publishing Communities
+  medium          = "leandrolugaresi"
+  # Professional/Business Oriented Communities
+  linkedin        = "leandrolugaresi"
+  # Social Networks
+  facebook        = "leandro.lugaresi"
+  instagram       = "leandrolugaresi"
+  twitter         = "leandrolugaresi"
+  telegram        = "leandrolugaresi"
+  email           = "leandrolugaresi92@gmail.com"

@@ -1,6 +1,3 @@
-[submodule "themes/osprey"]
-	path = themes/osprey
-	url = git@github.com:leandro-lugaresi/osprey.git
 [submodule "themes/hugo-future-imperfect"]
 	path = themes/hugo-future-imperfect
-	url = git@github.com:leandro-lugaresi/hugo-future-imperfect.git
+	url = git@github.com:jpescador/hugo-future-imperfect.git

@@ -1,29 +1,25 @@
 +++
-title = "About Hugo"
-date = "2014-04-09"
+title = "About"
+date = "2017-12-20"
 +++
 
-Hugo is a static site engine written in Go.
+Leandro is a software developer based in Joinville, Brazil. He currently works as a software engineer for Coderockr.
+
+He is interested in programming languages, storage engines, and event sourcing. Currently he's working with PHP and GO, PHP mostly in nasty and legacy code/projects and GO on new projects. When not working he is studying and creating something cool with GO.
+
+{{< img-post file="img/main/perfil-about.jpg" alt="Leandro Lugaresi at Gophercon Brazil 2017" type="center" >}}
+
+</br>
+Stats
+-----
 
 
-It makes use of a variety of open source projects including:
+{{< figure src="http://ghchart.rshah.org/leandro-lugaresi"  alt="Leandro Lugaresi's Github chart" title="Leandro Lugaresi's Github chart" >}}
 
-* [Cobra](https://github.com/spf13/cobra)
-* [Viper](https://github.com/spf13/viper)
-* [J Walter Weatherman](https://github.com/spf13/jWalterWeatherman)
-* [Cast](https://github.com/spf13/cast)
+</br>
+<figure><embed src="https://wakatime.com/share/@c662445c-bc85-4e4b-9903-ba85d320f477/a95ee9e9-124f-44c7-ade2-2e65d4495f2c.svg"></embed>
+<figcaption>
+    <h4>Leandro Lugaresi's Wakatime Languages over last 7 days</h4>
+</figcaption>
+    </figure>
 
-Learn more and contribute on [GitHub](https://github.com/spf13).
-
-## Setup
-
-Some fun facts about [Hugo](http://gohugo.io/):
-
-* Built in [Go](http://golang.org/)
-* Loosely inspired by [Jekyll](http://jekyllrb.com/)
-* Primarily developed by [spf13](http://spf13.com/) on the train while commuting to and from Manhattan.
-* Coded in [Vim](http://vim.org) using [spf13-vim](http://vim.spf13.com/)
-
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/spf13/hugo/issues/new) or [ask me on Twitter](https://twitter.com/spf13).
-
-Thanks for reading!

@@ -36,13 +36,13 @@ pluralizeListTitles = false
   loadFavicon          = false
   faviconVersion       = ""
   # Sets Social Share links to appear on posts
-  socialShare          = true
+  socialShare          = false
   # Load custom CSS or JavaScript files. The variable is an array so that you
   # can load multiple files if necessary. You can also load the standard theme
   # files by adding the value, "default".
   # customCSS            = ["default", "/path/to/file"]
   # customJS             = ["default", "/path/to/file"]
-  customCSS            = ["default"]
+  customCSS            = ["default", "/css/custom.css"]
   customJS             = ["default"]
 
 # Disqus will take priority over Staticman (github.com/eduardoboucas/staticman)

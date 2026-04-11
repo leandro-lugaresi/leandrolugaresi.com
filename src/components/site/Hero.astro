@@ -1,0 +1,82 @@
+---
+import HudCard from '@/components/site/HudCard.astro';
+import { GlowContainer } from '@/components/thegridcn/glow-container';
+
+/**
+ * Hero block for the landing page. Copy is stubbed for Phase 3 — Phase 4
+ * pulls real values from src/data/home.ts. The meta row pieces (location,
+ * status, role) are placeholders waiting on the home.ts schema.
+ */
+
+const META = [
+  { label: 'Location', value: 'Curitiba · BR' },
+  { label: 'Status', value: 'Open to ideas' },
+  { label: 'Role', value: 'Backend / systems' },
+] as const;
+---
+
+<section class="mx-auto max-w-6xl px-6 pt-16 pb-12 md:pt-24 md:pb-20">
+  <div class="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+    <div>
+      <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-primary/70">
+        [ transmission · v2 / online ]
+      </p>
+      <h1 class="mt-4 font-heading text-4xl font-bold uppercase tracking-wider text-foreground md:text-6xl lg:text-7xl">
+        Leandro
+        <span class="block text-primary">Lugaresi</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-base leading-relaxed text-foreground/60 md:text-lg">
+        Backend &amp; systems engineer. Notes on Go, distributed systems,
+        and the occasional Cloudflare playground. Building things that
+        prefer to keep running when nobody is watching.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a
+          href="/posts/"
+          class="group inline-flex items-center gap-2 rounded border border-primary/40 bg-primary/10 px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-primary transition-all hover:border-primary hover:bg-primary/20 hover:shadow-[0_0_24px_color-mix(in_oklch,var(--glow)_40%,transparent)]"
+        >
+          <span aria-hidden="true">▸</span>
+          Browse transmissions
+        </a>
+        <a
+          href="#about"
+          class="inline-flex items-center gap-2 rounded border border-primary/15 bg-card/60 px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-foreground/60 transition-all hover:border-primary/30 hover:text-foreground"
+        >
+          About the operator
+        </a>
+      </div>
+    </div>
+
+    <GlowContainer intensity="md" pulse className="hidden lg:block min-w-[260px]">
+      <div class="font-mono text-[10px] uppercase tracking-widest text-foreground/40">
+        Status feed
+      </div>
+      <div class="mt-3 flex items-center gap-3">
+        <span class="relative flex h-2 w-2">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
+        </span>
+        <span class="font-heading text-xs uppercase tracking-wider text-primary">Online</span>
+      </div>
+      <div class="mt-4 space-y-1 font-mono text-[10px] uppercase tracking-widest text-foreground/50">
+        <div>v2.tracer.bullet</div>
+        <div>build.ok</div>
+        <div>posts.pending</div>
+      </div>
+    </GlowContainer>
+  </div>
+
+  <HudCard class="mt-12 px-5 py-3">
+    <dl class="flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-[10px] uppercase tracking-widest">
+      {
+        META.map((item) => (
+          <div class="flex items-center gap-2">
+            <dt class="text-foreground/30">{item.label}</dt>
+            <dd class="text-primary/80">{item.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </HudCard>
+</section>

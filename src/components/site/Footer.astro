@@ -1,0 +1,55 @@
+---
+const SOCIALS = [
+  { label: 'GitHub', href: 'https://github.com/leandro-lugaresi', external: true },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/leandro-lugaresi/', external: true },
+  { label: 'Speaker Deck', href: 'https://speakerdeck.com/leandrolugaresi', external: true },
+  { label: 'RSS', href: '/rss.xml', external: false },
+] as const;
+
+const sha = import.meta.env.PUBLIC_GIT_SHA;
+const buildIso = import.meta.env.PUBLIC_BUILD_TIME;
+const buildDate = new Date(buildIso);
+const buildDisplay = isNaN(buildDate.getTime())
+  ? buildIso
+  : buildDate.toISOString().replace('T', ' ').slice(0, 16) + 'Z';
+const year = new Date().getUTCFullYear();
+---
+
+<footer class="mt-24 border-t border-primary/15 bg-background/60">
+  <div class="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-10 md:flex-row md:items-start md:justify-between">
+    <div class="space-y-2">
+      <div class="font-heading text-xs font-semibold uppercase tracking-widest text-primary">
+        Leandro Lugaresi
+      </div>
+      <p class="max-w-sm font-mono text-[10px] uppercase tracking-widest text-foreground/40">
+        Built on the grid · Astro &middot; gridcn (Clu) &middot; Cloudflare Pages
+      </p>
+    </div>
+
+    <nav aria-label="Social" class="flex flex-wrap items-center gap-2">
+      {
+        SOCIALS.map((item) => (
+          <a
+            href={item.href}
+            target={item.external ? '_blank' : undefined}
+            rel={item.external ? 'noopener noreferrer' : undefined}
+            class="rounded border border-primary/20 bg-card/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-foreground/60 transition-colors hover:border-primary/40 hover:text-primary"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+
+  <div class="border-t border-primary/10">
+    <div class="mx-auto flex max-w-6xl flex-col gap-2 px-6 py-4 font-mono text-[10px] uppercase tracking-widest text-foreground/30 md:flex-row md:items-center md:justify-between">
+      <div>© {year} Leandro Lugaresi · MIT for code, CC BY-NC-SA for prose</div>
+      <div class="flex items-center gap-3">
+        <span>Build #{sha}</span>
+        <span aria-hidden="true" class="h-3 w-px bg-foreground/20"></span>
+        <time datetime={buildIso}>{buildDisplay}</time>
+      </div>
+    </div>
+  </div>
+</footer>

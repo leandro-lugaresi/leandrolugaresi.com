@@ -1,33 +1,8 @@
 ---
-import { Font } from "astro:assets";
-import { GlowContainer } from "@/components/thegridcn/glow-container";
-import "../styles/global.css";
+import Base from '@/layouts/Base.astro';
+import Hero from '@/components/site/Hero.astro';
 ---
 
-<html lang="en" class="dark">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Leandro Lugaresi · v2</title>
-		<Font cssVariable="--font-orbitron" preload />
-		<Font cssVariable="--font-rajdhani" preload />
-		<Font cssVariable="--font-geist-mono" />
-	</head>
-	<body class="min-h-screen bg-background text-foreground font-sans">
-		<main class="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center gap-8 px-6">
-			<GlowContainer intensity="lg" pulse className="w-full p-10 text-center">
-				<p class="font-mono text-[10px] uppercase tracking-[0.3em] text-primary/80">
-					[ transmission #v2 · tracer bullet ]
-				</p>
-				<h1 class="mt-4 font-heading text-5xl font-bold uppercase tracking-wider text-foreground">
-					Leandro Lugaresi
-				</h1>
-				<p class="mt-4 font-sans text-lg text-muted-foreground">
-					Rebuilding on the grid. Orbitron / Rajdhani / Geist Mono live.
-				</p>
-			</GlowContainer>
-		</main>
-	</body>
-</html>
+<Base title="Leandro Lugaresi">
+  <Hero />
+</Base>

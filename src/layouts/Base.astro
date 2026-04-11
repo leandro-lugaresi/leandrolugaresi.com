@@ -1,0 +1,71 @@
+---
+import { Font } from 'astro:assets';
+import TopBar from '@/components/site/TopBar.astro';
+import Footer from '@/components/site/Footer.astro';
+import '@/styles/global.css';
+
+interface Props {
+  /** Page <title> — receives a "· Leandro Lugaresi" suffix automatically. */
+  title: string;
+  /** Meta description + og:description fallback. */
+  description?: string;
+  /** og:image override; defaults to /og.png at site root. */
+  ogImage?: string;
+  /** og:type — "website" for landings, "article" for posts. */
+  ogType?: 'website' | 'article';
+  /** Optional canonical override; defaults to the current request URL. */
+  canonical?: string;
+}
+
+const {
+  title,
+  description = 'Leandro Lugaresi — backend & systems engineer. Notes on Go, distributed systems, and the occasional Cloudflare playground.',
+  ogImage = '/og.png',
+  ogType = 'website',
+  canonical,
+} = Astro.props;
+
+const SITE_NAME = 'Leandro Lugaresi';
+const fullTitle = title === SITE_NAME ? title : `${title} · ${SITE_NAME}`;
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
+const ogImageUrl = new URL(ogImage, Astro.site ?? Astro.url).toString();
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="color-scheme" content="dark" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title={SITE_NAME} href="/rss.xml" />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <Font cssVariable="--font-orbitron" preload />
+    <Font cssVariable="--font-rajdhani" preload />
+    <Font cssVariable="--font-geist-mono" />
+  </head>
+  <body class="min-h-screen bg-background font-sans text-foreground antialiased">
+    <div class="flex min-h-screen flex-col">
+      <TopBar />
+      <main class="flex-1">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>

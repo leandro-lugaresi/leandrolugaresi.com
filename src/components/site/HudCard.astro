@@ -1,0 +1,35 @@
+---
+/**
+ * Reusable Tron-HUD card chrome: bordered, blurred, scanline overlay,
+ * 4-corner brackets. Wraps any children. Used by hero, footer, stats,
+ * post cards. Inline-styled — no client JS, no React.
+ */
+interface Props {
+  class?: string;
+  /** Set to false to drop the scanline overlay (e.g. when content needs sharp contrast). */
+  scanlines?: boolean;
+}
+
+const { class: className = '', scanlines = true } = Astro.props;
+---
+
+<div
+  class:list={[
+    'relative overflow-hidden rounded border border-primary/20 bg-card/80 backdrop-blur-sm',
+    className,
+  ]}
+>
+  {scanlines && (
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,0,0,0.03)_2px,rgba(0,0,0,0.03)_4px)]"
+    />
+  )}
+  <div class="relative">
+    <slot />
+  </div>
+  <div aria-hidden="true" class="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l-2 border-t-2 border-primary/30" />
+  <div aria-hidden="true" class="pointer-events-none absolute right-0 top-0 h-3 w-3 border-r-2 border-t-2 border-primary/30" />
+  <div aria-hidden="true" class="pointer-events-none absolute bottom-0 left-0 h-3 w-3 border-b-2 border-l-2 border-primary/30" />
+  <div aria-hidden="true" class="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b-2 border-r-2 border-primary/30" />
+</div>

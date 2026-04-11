@@ -1,0 +1,53 @@
+---
+const NAV = [
+  { label: 'Home', href: '/' },
+  { label: 'Posts', href: '/posts/' },
+] as const;
+
+const sha = import.meta.env.PUBLIC_GIT_SHA;
+const currentPath = Astro.url.pathname;
+
+function isActive(href: string) {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+}
+---
+
+<header class="sticky top-0 z-40 border-b border-primary/20 bg-background/80 backdrop-blur-md">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
+    <a href="/" class="flex items-center gap-3 outline-none focus-visible:ring-2 focus-visible:ring-ring rounded">
+      <span
+        class="flex h-7 w-7 items-center justify-center rounded border border-primary/40 bg-primary/10 font-heading text-[11px] font-bold uppercase tracking-tighter text-primary"
+        aria-hidden="true"
+      >
+        LL
+      </span>
+      <span class="font-heading text-[11px] font-semibold uppercase tracking-wider text-primary">
+        Leandro Lugaresi
+      </span>
+    </a>
+
+    <nav aria-label="Primary" class="flex items-center gap-1">
+      {
+        NAV.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'rounded px-3 py-1 font-mono text-[10px] uppercase tracking-widest transition-colors',
+              isActive(item.href)
+                ? 'bg-primary/10 text-primary'
+                : 'text-foreground/50 hover:bg-primary/5 hover:text-foreground/80',
+            ]}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <span aria-hidden="true" class="mx-2 hidden h-4 w-px bg-primary/20 sm:block" />
+      <span class="hidden font-mono text-[10px] uppercase tracking-widest text-primary/60 sm:block">
+        Transmission #{sha}
+      </span>
+    </nav>
+  </div>
+</header>

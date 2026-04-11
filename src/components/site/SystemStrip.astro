@@ -1,0 +1,87 @@
+---
+import HudCard from '@/components/site/HudCard.astro';
+
+/**
+ * Thin "system online" strip that sits below the full-bleed hero.
+ * Holds the meta facts (location/status/role) and a few live-feed
+ * indicators on the right. Pure HTML — no React, no JS.
+ *
+ * Phase 4 will replace these constants with values pulled from
+ * src/data/home.ts.
+ */
+
+const META = [
+  { label: 'Location', value: 'Curitiba · BR' },
+  { label: 'Status', value: 'Open to ideas' },
+  { label: 'Role', value: 'Backend / systems' },
+] as const;
+
+const FEED = [
+  { label: 'Build', value: 'OK' },
+  { label: 'Posts', value: 'Pending' },
+  { label: 'Mode', value: 'Dark / Clu' },
+] as const;
+---
+
+<section
+  aria-label="System status"
+  class="relative mx-auto mt-10 max-w-6xl px-6"
+>
+  <HudCard class="px-5 py-4 md:px-7 md:py-5">
+    <div
+      class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
+    >
+      <!-- left: meta dossier -->
+      <div class="flex items-center gap-3">
+        <span
+          class="font-mono text-[9px] uppercase tracking-[0.4em] text-primary/70"
+        >
+          Operator
+        </span>
+        <span aria-hidden="true" class="h-3 w-px bg-primary/30"></span>
+        <dl
+          class="flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[10px] uppercase tracking-widest"
+        >
+          {
+            META.map((item) => (
+              <div class="flex items-center gap-2">
+                <dt class="text-foreground/30">{item.label}</dt>
+                <dd class="text-foreground/80">{item.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+
+      <!-- right: live feed indicators -->
+      <div class="flex items-center gap-3">
+        <span class="relative flex h-2 w-2">
+          <span
+            class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60"
+          ></span>
+          <span
+            class="relative inline-flex h-2 w-2 rounded-full bg-primary"
+          ></span>
+        </span>
+        <span
+          class="font-mono text-[9px] uppercase tracking-[0.4em] text-primary"
+        >
+          Online
+        </span>
+        <span aria-hidden="true" class="h-3 w-px bg-primary/30"></span>
+        <dl
+          class="flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[10px] uppercase tracking-widest"
+        >
+          {
+            FEED.map((item) => (
+              <div class="flex items-center gap-2">
+                <dt class="text-foreground/30">{item.label}</dt>
+                <dd class="text-primary/80">{item.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </HudCard>
+</section>

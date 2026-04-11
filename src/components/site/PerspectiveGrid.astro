@@ -1,0 +1,84 @@
+---
+/**
+ * CSS-only "3D" grid backdrop. A flat grid div is rotated on X via
+ * `perspective() rotateX()` so it appears to recede into a vanishing
+ * point. The grid lines slide forward via a translateY animation,
+ * giving the illusion of motion. Masked top/bottom so it dissolves
+ * into the page background instead of cutting hard.
+ *
+ * Pure SSR. Zero JS. Cheap on CPU/GPU (composited transform only).
+ * Reads --primary-rgb so it picks up the active theme palette.
+ */
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div
+  aria-hidden="true"
+  class:list={['pointer-events-none absolute inset-0 overflow-hidden', className]}
+>
+  <div class="perspective-grid-stage">
+    <div class="perspective-grid-floor"></div>
+  </div>
+
+  <!-- soft fade overlays so the grid melts into the background -->
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,transparent_30%,var(--background)_85%)]"></div>
+  <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent"></div>
+  <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent"></div>
+
+  <!-- center radial glow tinted with primary color -->
+  <div
+    class="absolute left-1/2 top-1/2 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-50"
+    style="background: radial-gradient(ellipse at center, color-mix(in oklch, var(--glow) 18%, transparent) 0%, transparent 60%);"
+  ></div>
+</div>
+
+<style>
+  .perspective-grid-stage {
+    position: absolute;
+    inset: 0;
+    perspective: 800px;
+    perspective-origin: 50% 50%;
+  }
+
+  .perspective-grid-floor {
+    position: absolute;
+    /* Oversized so the rotation doesn't reveal the edge */
+    left: -50%;
+    right: -50%;
+    bottom: -10%;
+    height: 200%;
+    transform-origin: 50% 100%;
+    transform: rotateX(60deg);
+    background-image:
+      linear-gradient(to right, color-mix(in oklch, var(--glow) 35%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklch, var(--glow) 35%, transparent) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-position: 0 0;
+    animation: perspective-grid-scroll 8s linear infinite;
+    /* Fade the grid out as it recedes towards the horizon */
+    -webkit-mask-image: linear-gradient(to top, black 0%, black 30%, transparent 90%);
+    mask-image: linear-gradient(to top, black 0%, black 30%, transparent 90%);
+    will-change: background-position;
+  }
+
+  @keyframes perspective-grid-scroll {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 0 60px;
+    }
+  }
+
+  /* Honor reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .perspective-grid-floor {
+      animation: none;
+    }
+  }
+</style>

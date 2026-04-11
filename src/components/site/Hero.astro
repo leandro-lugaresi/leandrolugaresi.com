@@ -1,82 +1,201 @@
 ---
-import HudCard from '@/components/site/HudCard.astro';
-import { GlowContainer } from '@/components/thegridcn/glow-container';
+import PerspectiveGrid from '@/components/site/PerspectiveGrid.astro';
 
 /**
- * Hero block for the landing page. Copy is stubbed for Phase 3 — Phase 4
- * pulls real values from src/data/home.ts. The meta row pieces (location,
- * status, role) are placeholders waiting on the home.ts schema.
+ * Full-bleed landing hero. Inspired by the gridcn home page hero
+ * (educlopez/thegridcn-ui app/page.tsx) but rewritten as static
+ * SSR with a CSS perspective grid in place of Three.js Grid3D.
+ *
+ * Layout:
+ *   - PerspectiveGrid backdrop (absolute, behind everything)
+ *   - Top "uplink" thin bar
+ *   - Outer scanning frame with corner brackets and a centered label
+ *   - Big split title (LEANDRO / LUGARESI) with text-shadow glow
+ *   - Mono subtitle in tracking-[0.4em]
+ *   - Two CTAs (filled + outline) in the gridcn home style
+ *   - Bottom scroll indicator
+ *   - Animated sweeping border lights on top + bottom of the frame
  */
-
-const META = [
-  { label: 'Location', value: 'Curitiba · BR' },
-  { label: 'Status', value: 'Open to ideas' },
-  { label: 'Role', value: 'Backend / systems' },
-] as const;
 ---
 
-<section class="mx-auto max-w-6xl px-6 pt-16 pb-12 md:pt-24 md:pb-20">
-  <div class="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-    <div>
-      <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-primary/70">
-        [ transmission · v2 / online ]
-      </p>
-      <h1 class="mt-4 font-heading text-4xl font-bold uppercase tracking-wider text-foreground md:text-6xl lg:text-7xl">
-        Leandro
-        <span class="block text-primary">Lugaresi</span>
-      </h1>
-      <p class="mt-6 max-w-xl text-base leading-relaxed text-foreground/60 md:text-lg">
-        Backend &amp; systems engineer. Notes on Go, distributed systems,
-        and the occasional Cloudflare playground. Building things that
-        prefer to keep running when nobody is watching.
-      </p>
+<section
+  class="relative isolate flex min-h-[88vh] w-full items-center justify-center overflow-hidden"
+>
+  <PerspectiveGrid />
 
-      <div class="mt-8 flex flex-wrap items-center gap-3">
-        <a
-          href="/posts/"
-          class="group inline-flex items-center gap-2 rounded border border-primary/40 bg-primary/10 px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-primary transition-all hover:border-primary hover:bg-primary/20 hover:shadow-[0_0_24px_color-mix(in_oklch,var(--glow)_40%,transparent)]"
-        >
-          <span aria-hidden="true">▸</span>
-          Browse transmissions
-        </a>
-        <a
-          href="#about"
-          class="inline-flex items-center gap-2 rounded border border-primary/15 bg-card/60 px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-foreground/60 transition-all hover:border-primary/30 hover:text-foreground"
-        >
-          About the operator
-        </a>
-      </div>
+  <!-- thin uplink bar at the very top of the hero -->
+  <div
+    class="absolute inset-x-0 top-0 z-20 border-b border-primary/15 bg-background/40 backdrop-blur-sm"
+  >
+    <div
+      class="mx-auto flex max-w-6xl items-center justify-between px-6 py-1.5 font-mono text-[9px] uppercase tracking-widest text-foreground/40"
+    >
+      <span>UPLINK · leandrolugaresi.com.br</span>
+      <span class="hidden sm:inline">SECTOR · backend &middot; systems &middot; go</span>
+      <span class="text-primary/70">STATUS · ONLINE</span>
     </div>
-
-    <GlowContainer intensity="md" pulse className="hidden lg:block min-w-[260px]">
-      <div class="font-mono text-[10px] uppercase tracking-widest text-foreground/40">
-        Status feed
-      </div>
-      <div class="mt-3 flex items-center gap-3">
-        <span class="relative flex h-2 w-2">
-          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60"></span>
-          <span class="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
-        </span>
-        <span class="font-heading text-xs uppercase tracking-wider text-primary">Online</span>
-      </div>
-      <div class="mt-4 space-y-1 font-mono text-[10px] uppercase tracking-widest text-foreground/50">
-        <div>v2.tracer.bullet</div>
-        <div>build.ok</div>
-        <div>posts.pending</div>
-      </div>
-    </GlowContainer>
   </div>
 
-  <HudCard class="mt-12 px-5 py-3">
-    <dl class="flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-[10px] uppercase tracking-widest">
-      {
-        META.map((item) => (
-          <div class="flex items-center gap-2">
-            <dt class="text-foreground/30">{item.label}</dt>
-            <dd class="text-primary/80">{item.value}</dd>
-          </div>
-        ))
-      }
-    </dl>
-  </HudCard>
+  <!-- main centered content with outer scanning frame -->
+  <div class="relative z-10 mx-auto max-w-5xl px-6 py-20 md:py-28">
+    <div class="relative">
+      <!-- outer scanning frame -->
+      <div aria-hidden="true" class="absolute -inset-6 md:-inset-10">
+        <div class="absolute inset-0 border border-primary/20"></div>
+
+        <!-- thicker corner brackets -->
+        <div class="absolute -left-1 -top-1 h-10 w-10 border-l-2 border-t-2 border-primary"></div>
+        <div class="absolute -right-1 -top-1 h-10 w-10 border-r-2 border-t-2 border-primary"></div>
+        <div class="absolute -bottom-1 -left-1 h-10 w-10 border-b-2 border-l-2 border-primary"></div>
+        <div class="absolute -bottom-1 -right-1 h-10 w-10 border-b-2 border-r-2 border-primary"></div>
+
+        <!-- centered label cutout on top edge -->
+        <div
+          class="absolute -top-3 left-1/2 -translate-x-1/2 bg-background px-4 font-mono text-[10px] tracking-[0.5em] text-primary"
+        >
+          [ TRANSMISSION · ONLINE ]
+        </div>
+
+        <!-- centered handle on bottom edge -->
+        <div
+          class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-background px-4 font-mono text-[9px] tracking-[0.4em] text-primary/50"
+        >
+          v2 / dark / clu
+        </div>
+
+        <!-- animated top + bottom sweeping highlights -->
+        <div class="absolute inset-x-0 top-0 h-px overflow-hidden">
+          <div class="hero-sweep h-full w-1/4 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+        </div>
+        <div class="absolute inset-x-0 bottom-0 h-px overflow-hidden">
+          <div class="hero-sweep hero-sweep-reverse h-full w-1/4 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+        </div>
+      </div>
+
+      <!-- title block -->
+      <div class="relative py-10 text-center md:py-14">
+        <p
+          class="font-mono text-[10px] uppercase tracking-[0.5em] text-foreground/60"
+        >
+          OPERATOR DOSSIER · 0001
+        </p>
+
+        <h1
+          class="mt-6 font-heading font-black uppercase leading-[0.85] tracking-[0.04em] text-foreground"
+        >
+          <span
+            class="block text-5xl md:text-7xl lg:text-8xl"
+            style="text-shadow: 0 0 40px color-mix(in oklch, var(--glow) 35%, transparent), 0 0 90px color-mix(in oklch, var(--glow) 18%, transparent);"
+          >
+            Leandro
+          </span>
+          <span
+            class="mt-2 block text-6xl text-primary md:text-8xl lg:text-[9rem]"
+            style="text-shadow: 0 0 60px color-mix(in oklch, var(--glow) 55%, transparent), 0 0 140px color-mix(in oklch, var(--glow) 30%, transparent);"
+          >
+            Lugaresi
+          </span>
+        </h1>
+
+        <!-- title underline accents (3 progressively shorter lines) -->
+        <div class="mt-8 flex justify-center gap-1">
+          <div class="h-px w-16 bg-primary/70"></div>
+          <div class="h-px w-8 bg-primary/40"></div>
+          <div class="h-px w-3 bg-primary/20"></div>
+        </div>
+
+        <p
+          class="mx-auto mt-8 max-w-2xl font-mono text-xs uppercase tracking-[0.35em] text-primary/80 md:text-sm"
+        >
+          Backend &amp; Systems Engineer
+        </p>
+        <p
+          class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-foreground/60 md:text-lg"
+        >
+          Notes on Go, distributed systems, and the occasional Cloudflare
+          playground. Building things that prefer to keep running when
+          nobody is watching.
+        </p>
+
+        <!-- CTAs in gridcn home style -->
+        <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="/posts/"
+            class="group relative overflow-hidden rounded border-2 border-primary bg-primary/15 px-8 py-3 font-mono text-xs font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_40px_var(--primary)]"
+          >
+            <span class="relative z-10">Browse Transmissions</span>
+            <span
+              aria-hidden="true"
+              class="absolute inset-0 -z-0 translate-y-full bg-primary transition-transform duration-300 group-hover:translate-y-0"
+            ></span>
+          </a>
+          <a
+            href="https://github.com/leandro-lugaresi"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded border border-primary/30 bg-transparent px-8 py-3 font-mono text-xs font-bold uppercase tracking-widest text-foreground/70 transition-all hover:border-primary/60 hover:text-primary hover:shadow-[0_0_24px_color-mix(in_oklch,var(--glow)_35%,transparent)]"
+          >
+            View on GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- bottom scroll indicator -->
+  <div class="absolute inset-x-0 bottom-0 z-10">
+    <div class="h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
+    <div class="flex items-center justify-center gap-6 py-3">
+      <div class="h-px w-20 bg-gradient-to-r from-transparent to-primary/40"></div>
+      <div
+        class="hero-scroll-bounce font-mono text-[9px] uppercase tracking-[0.5em] text-foreground/50"
+      >
+        ↓ Scroll ↓
+      </div>
+      <div class="h-px w-20 bg-gradient-to-l from-transparent to-primary/40"></div>
+    </div>
+  </div>
 </section>
+
+<style>
+  /* Sweeping border highlight — runs along the top + bottom edges of
+     the outer frame. Two copies; the second runs in reverse. */
+  @keyframes hero-sweep {
+    0%,
+    100% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(400%);
+    }
+  }
+  .hero-sweep {
+    animation: hero-sweep 6s ease-in-out infinite;
+  }
+  .hero-sweep-reverse {
+    animation-direction: reverse;
+    animation-delay: -3s;
+  }
+
+  @keyframes hero-scroll-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translateY(4px);
+      opacity: 1;
+    }
+  }
+  .hero-scroll-bounce {
+    animation: hero-scroll-bounce 2.4s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-sweep,
+    .hero-scroll-bounce {
+      animation: none;
+    }
+  }
+</style>

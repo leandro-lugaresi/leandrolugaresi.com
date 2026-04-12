@@ -1,25 +1,25 @@
 ---
 import HudCard from '@/components/site/HudCard.astro';
+import { system } from '@/data/home';
 
 /**
  * Thin "system online" strip that sits below the full-bleed hero.
- * Holds the meta facts (location/status/role) and a few live-feed
- * indicators on the right. Pure HTML — no React, no JS.
+ * Holds the meta facts (location/status/role) on the left and a few
+ * live-feed indicators on the right. Pure HTML — no React, no JS.
  *
- * Phase 4 will replace these constants with values pulled from
- * src/data/home.ts.
+ * All copy comes from src/data/home.ts (`system`).
  */
 
 const META = [
-  { label: 'Location', value: 'Curitiba · BR' },
-  { label: 'Status', value: 'Open to ideas' },
-  { label: 'Role', value: 'Backend / systems' },
+  { label: 'Location', value: system.location },
+  { label: 'Status', value: system.status },
+  { label: 'Role', value: system.role },
 ] as const;
 
 const FEED = [
-  { label: 'Build', value: 'OK' },
-  { label: 'Posts', value: 'Pending' },
-  { label: 'Mode', value: 'Dark / Clu' },
+  { label: 'Build', value: system.build },
+  { label: 'Posts', value: system.posts },
+  { label: 'Mode', value: system.mode },
 ] as const;
 ---
 

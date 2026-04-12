@@ -2,9 +2,22 @@
 import Base from '@/layouts/Base.astro';
 import Hero from '@/components/site/Hero.astro';
 import SystemStrip from '@/components/site/SystemStrip.astro';
+import About from '@/components/site/About.astro';
+import Stats from '@/components/site/Stats.astro';
+import Experience from '@/components/site/Experience.astro';
+import Projects from '@/components/site/Projects.astro';
+import Speaking from '@/components/site/Speaking.astro';
+import RecentPosts from '@/components/site/RecentPosts.astro';
+import { hero } from '@/data/home';
 ---
 
-<Base title="Leandro Lugaresi">
+<Base title={hero.name} description={hero.tagline}>
   <Hero />
   <SystemStrip />
+  <About />
+  <Stats />
+  <Experience />
+  <Projects />
+  <Speaking />
+  <RecentPosts />
 </Base>

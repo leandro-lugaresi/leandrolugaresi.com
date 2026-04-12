@@ -1,10 +1,5 @@
 ---
-const SOCIALS = [
-  { label: 'GitHub', href: 'https://github.com/leandro-lugaresi', external: true },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/leandro-lugaresi/', external: true },
-  { label: 'Speaker Deck', href: 'https://speakerdeck.com/leandrolugaresi', external: true },
-  { label: 'RSS', href: '/rss.xml', external: false },
-] as const;
+import { social } from '@/data/home';
 
 const sha = import.meta.env.PUBLIC_GIT_SHA;
 const buildIso = import.meta.env.PUBLIC_BUILD_TIME;
@@ -28,7 +23,7 @@ const year = new Date().getUTCFullYear();
 
     <nav aria-label="Social" class="flex flex-wrap items-center gap-2">
       {
-        SOCIALS.map((item) => (
+        social.map((item) => (
           <a
             href={item.href}
             target={item.external ? '_blank' : undefined}

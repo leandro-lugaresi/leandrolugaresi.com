@@ -1,0 +1,86 @@
+---
+import HudCard from '@/components/site/HudCard.astro';
+import { projects } from '@/data/home';
+
+const formatStars = (n: number) =>
+  n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
+---
+
+<section
+  id="projects"
+  aria-labelledby="projects-title"
+  class="relative mx-auto mt-24 max-w-6xl px-6"
+>
+  <div class="mb-8 flex items-end justify-between gap-6">
+    <div>
+      <p
+        class="font-mono text-[10px] uppercase tracking-[0.4em] text-primary/70"
+      >
+        // 0004
+      </p>
+      <h2
+        id="projects-title"
+        class="mt-3 font-heading text-2xl font-bold uppercase tracking-wider text-foreground md:text-3xl"
+      >
+        Open Modules
+      </h2>
+    </div>
+    <p
+      class="hidden font-mono text-[10px] uppercase tracking-widest text-foreground/30 md:block"
+    >
+      {projects.length} repos · MIT
+    </p>
+  </div>
+
+  <div class="grid gap-3 md:grid-cols-3">
+    {
+      projects.map((p, i) => (
+        <a
+          href={p.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+        >
+          <HudCard class="h-full px-5 py-5 transition-all group-hover:border-primary/50 group-hover:shadow-[0_0_24px_color-mix(in_oklch,var(--glow)_22%,transparent)]">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/30">
+                Module {String(i + 1).padStart(2, '0')}
+              </span>
+              {p.stars > 0 && (
+                <span class="inline-flex items-center gap-1 rounded border border-primary/20 bg-primary/5 px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest text-primary/80">
+                  ★ {formatStars(p.stars)}
+                </span>
+              )}
+            </div>
+
+            <h3 class="mt-4 font-heading text-xl font-bold uppercase tracking-wider text-foreground transition-colors group-hover:text-primary">
+              {p.name}
+            </h3>
+
+            <p class="mt-3 text-sm leading-relaxed text-foreground/60">
+              {p.description}
+            </p>
+
+            <div class="mt-4 border-t border-primary/10 pt-3">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="rounded border border-primary/20 bg-primary/5 px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest text-primary/70">
+                  {p.language}
+                </span>
+                {p.tags.map((t) => (
+                  <span class="font-mono text-[9px] uppercase tracking-widest text-foreground/40">
+                    · {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div class="mt-4 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest text-primary/60 transition-colors group-hover:text-primary">
+              View source
+              <span aria-hidden="true" class="transition-transform group-hover:translate-x-0.5">→</span>
+            </div>
+          </HudCard>
+        </a>
+      ))
+    }
+  </div>
+</section>

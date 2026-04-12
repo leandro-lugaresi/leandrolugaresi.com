@@ -1,0 +1,91 @@
+---
+import HudCard from '@/components/site/HudCard.astro';
+
+/**
+ * Recent posts grid for the landing page. Phase 5 sets up the
+ * content collection; Phase 6 wires this component to actual
+ * results from `getCollection('blog')`. Until then it accepts
+ * an empty array and renders nothing.
+ *
+ * Per the plan: "Recent Posts section: hidden when 0 posts."
+ */
+
+export interface RecentPostItem {
+  slug: string;
+  title: string;
+  description: string;
+  pubDate: Date;
+  /** Computed in src/lib/reading-time.ts in Phase 5. */
+  readingTime?: string;
+  tags?: string[];
+}
+
+interface Props {
+  posts?: RecentPostItem[];
+}
+
+const { posts = [] } = Astro.props;
+
+const dateLabel = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' });
+---
+
+{
+  posts.length > 0 && (
+    <section
+      id="recent-posts"
+      aria-labelledby="recent-posts-title"
+      class="relative mx-auto mt-24 max-w-6xl px-6"
+    >
+      <div class="mb-8 flex items-end justify-between gap-6">
+        <div>
+          <p class="font-mono text-[10px] uppercase tracking-[0.4em] text-primary/70">
+            // 0006
+          </p>
+          <h2
+            id="recent-posts-title"
+            class="mt-3 font-heading text-2xl font-bold uppercase tracking-wider text-foreground md:text-3xl"
+          >
+            Recent Transmissions
+          </h2>
+        </div>
+        <a
+          href="/posts/"
+          class="hidden font-mono text-[10px] uppercase tracking-widest text-primary/60 transition-colors hover:text-primary md:inline-flex"
+        >
+          All transmissions →
+        </a>
+      </div>
+
+      <div class="grid gap-3 md:grid-cols-3">
+        {posts.map((post, i) => (
+          <a
+            href={`/posts/${post.slug}/`}
+            class="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+          >
+            <HudCard class="h-full px-5 py-5 transition-all group-hover:border-primary/50 group-hover:shadow-[0_0_24px_color-mix(in_oklch,var(--glow)_22%,transparent)]">
+              <div class="flex items-center justify-between font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/30">
+                <span>Tx {String(i + 1).padStart(2, '0')}</span>
+                <time datetime={post.pubDate.toISOString()}>{dateLabel(post.pubDate)}</time>
+              </div>
+
+              <h3 class="mt-4 font-heading text-lg font-bold uppercase tracking-wider text-foreground transition-colors group-hover:text-primary">
+                {post.title}
+              </h3>
+
+              <p class="mt-3 text-sm leading-relaxed text-foreground/60">
+                {post.description}
+              </p>
+
+              {post.readingTime && (
+                <div class="mt-4 font-mono text-[10px] uppercase tracking-widest text-foreground/40">
+                  {post.readingTime}
+                </div>
+              )}
+            </HudCard>
+          </a>
+        ))}
+      </div>
+    </section>
+  )
+}

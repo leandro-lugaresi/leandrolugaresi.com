@@ -1,21 +1,21 @@
 ---
 import PerspectiveGrid from '@/components/site/PerspectiveGrid.astro';
+import { hero, social } from '@/data/home';
 
 /**
  * Full-bleed landing hero. Inspired by the gridcn home page hero
  * (educlopez/thegridcn-ui app/page.tsx) but rewritten as static
  * SSR with a CSS perspective grid in place of Three.js Grid3D.
  *
- * Layout:
- *   - PerspectiveGrid backdrop (absolute, behind everything)
- *   - Top "uplink" thin bar
- *   - Outer scanning frame with corner brackets and a centered label
- *   - Big split title (LEANDRO / LUGARESI) with text-shadow glow
- *   - Mono subtitle in tracking-[0.4em]
- *   - Two CTAs (filled + outline) in the gridcn home style
- *   - Bottom scroll indicator
- *   - Animated sweeping border lights on top + bottom of the frame
+ * All copy comes from src/data/home.ts.
  */
+
+// Split the full name on the first space — first word stacks above,
+// the rest gets the bigger primary-amber treatment.
+const [firstName, ...rest] = hero.name.split(' ');
+const lastName = rest.join(' ');
+
+const githubLink = social.find((s) => s.label === 'GitHub')?.href ?? '#';
 ---
 
 <section
@@ -77,7 +77,7 @@ import PerspectiveGrid from '@/components/site/PerspectiveGrid.astro';
         <p
           class="font-mono text-[10px] uppercase tracking-[0.5em] text-foreground/60"
         >
-          OPERATOR DOSSIER · 0001
+          {hero.kicker}
         </p>
 
         <h1
@@ -87,13 +87,13 @@ import PerspectiveGrid from '@/components/site/PerspectiveGrid.astro';
             class="block text-5xl md:text-7xl lg:text-8xl"
             style="text-shadow: 0 0 40px color-mix(in oklch, var(--glow) 35%, transparent), 0 0 90px color-mix(in oklch, var(--glow) 18%, transparent);"
           >
-            Leandro
+            {firstName}
           </span>
           <span
             class="mt-2 block text-6xl text-primary md:text-8xl lg:text-[9rem]"
             style="text-shadow: 0 0 60px color-mix(in oklch, var(--glow) 55%, transparent), 0 0 140px color-mix(in oklch, var(--glow) 30%, transparent);"
           >
-            Lugaresi
+            {lastName}
           </span>
         </h1>
 
@@ -107,14 +107,12 @@ import PerspectiveGrid from '@/components/site/PerspectiveGrid.astro';
         <p
           class="mx-auto mt-8 max-w-2xl font-mono text-xs uppercase tracking-[0.35em] text-primary/80 md:text-sm"
         >
-          Backend &amp; Systems Engineer
+          {hero.headline}
         </p>
         <p
           class="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-foreground/60 md:text-lg"
         >
-          Notes on Go, distributed systems, and the occasional Cloudflare
-          playground. Building things that prefer to keep running when
-          nobody is watching.
+          {hero.tagline}
         </p>
 
         <!-- CTAs in gridcn home style -->
@@ -130,7 +128,7 @@ import PerspectiveGrid from '@/components/site/PerspectiveGrid.astro';
             ></span>
           </a>
           <a
-            href="https://github.com/leandro-lugaresi"
+            href={githubLink}
             target="_blank"
             rel="noopener noreferrer"
             class="rounded border border-primary/30 bg-transparent px-8 py-3 font-mono text-xs font-bold uppercase tracking-widest text-foreground/70 transition-all hover:border-primary/60 hover:text-primary hover:shadow-[0_0_24px_color-mix(in_oklch,var(--glow)_35%,transparent)]"

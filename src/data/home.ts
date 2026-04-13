@@ -198,6 +198,15 @@ export const experience: ExperienceJob[] = [
     ],
   },
   {
+    company: "Magrathea Labs",
+    role: "Software Engineer",
+    period: "2018",
+    location: "Joinville, Brazil",
+    summary:
+      "Designed and built a centralized audit log system aggregating data from ~700 client databases for compliance and analysis, using Node.js and Kafka.",
+    highlights: [],
+  },
+  {
     company: "Coderockr",
     role: "Developer",
     period: "2014 — 2018",

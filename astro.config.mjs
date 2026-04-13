@@ -6,6 +6,11 @@ import react from '@astrojs/react';
 
 import tailwindcss from '@tailwindcss/vite';
 
+import mdx from '@astrojs/mdx';
+
+import { remarkReadingTime } from './src/lib/reading-time.ts';
+import { shikiTronChrome } from './src/lib/shiki-tron-chrome.ts';
+
 /**
  * Build-time metadata. Cloudflare Pages exposes CF_PAGES_COMMIT_SHA; locally
  * we shell out to git. Falls back to "dev" if neither works (e.g. CI without
@@ -30,7 +35,15 @@ const BUILD_TIME = new Date().toISOString();
 // https://astro.build/config
 export default defineConfig({
   site: 'https://leandrolugaresi.com.br',
-  integrations: [react()],
+  integrations: [react(), mdx()],
+
+  markdown: {
+    remarkPlugins: [remarkReadingTime],
+    shikiConfig: {
+      theme: 'github-dark-default',
+      transformers: [shikiTronChrome()],
+    },
+  },
 
   fonts: [
     {

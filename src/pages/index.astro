@@ -1,4 +1,5 @@
 ---
+import { getCollection } from "astro:content";
 import Base from "@/layouts/Base.astro";
 import Hero from "@/components/site/Hero.astro";
 import SystemStrip from "@/components/site/SystemStrip.astro";
@@ -8,7 +9,31 @@ import Experience from "@/components/site/Experience.astro";
 import Projects from "@/components/site/Projects.astro";
 import Speaking from "@/components/site/Speaking.astro";
 import RecentPosts from "@/components/site/RecentPosts.astro";
+import type { RecentPostItem } from "@/components/site/RecentPosts.astro";
 import { hero } from "@/data/home";
+
+const WORDS_PER_MINUTE = 220;
+const estimateReading = (body: string | undefined) => {
+  if (!body) return '1 min read';
+  const words = body.trim().split(/\s+/).filter(Boolean).length;
+  return `${Math.max(1, Math.round(words / WORDS_PER_MINUTE))} min read`;
+};
+
+const recentPosts: RecentPostItem[] = (
+  await getCollection('blog', ({ data }) =>
+    import.meta.env.PROD ? !data.draft : true
+  )
+)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 3)
+  .map((post) => ({
+    slug: post.id,
+    title: post.data.title,
+    description: post.data.description,
+    pubDate: post.data.pubDate,
+    readingTime: estimateReading(post.body),
+    tags: post.data.tags,
+  }));
 ---
 
 <Base title={hero.name} description={hero.tagline}>
@@ -19,5 +44,5 @@ import { hero } from "@/data/home";
     <Experience />
     <Projects />
     <Speaking />
-    <RecentPosts />
+    <RecentPosts posts={recentPosts} />
 </Base>

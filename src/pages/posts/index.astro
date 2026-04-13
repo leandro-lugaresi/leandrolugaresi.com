@@ -1,0 +1,107 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import HudCard from '@/components/site/HudCard.astro';
+
+const posts = (
+  await getCollection('blog', ({ data }) =>
+    import.meta.env.PROD ? !data.draft : true
+  )
+).sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const WORDS_PER_MINUTE = 220;
+const estimateReadingMinutes = (body: string | undefined) => {
+  if (!body) return 1;
+  const words = body.trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(words / WORDS_PER_MINUTE));
+};
+
+const dateLabel = (d: Date) =>
+  d.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
+  });
+---
+
+<Base
+  title="Transmissions"
+  description="Notes on backend engineering, data pipelines, and the occasional Cloudflare playground."
+>
+  <section class="relative mx-auto max-w-5xl px-6 py-16 md:py-24">
+    <header class="mb-12">
+      <p
+        class="font-mono text-[10px] uppercase tracking-[0.4em] text-primary/70"
+      >
+        // Transmissions
+      </p>
+      <h1
+        class="mt-4 font-heading text-3xl font-bold uppercase tracking-wide text-foreground md:text-5xl"
+      >
+        All posts
+      </h1>
+      <p class="mt-4 max-w-2xl text-base leading-relaxed text-foreground/60">
+        Everything published so far. Newest first.
+      </p>
+      <p
+        class="mt-6 font-mono text-[10px] uppercase tracking-widest text-foreground/30"
+      >
+        {posts.length} {posts.length === 1 ? 'record' : 'records'}
+      </p>
+    </header>
+
+    {
+      posts.length === 0 ? (
+        <HudCard class="px-6 py-10 text-center">
+          <p class="font-mono text-[11px] uppercase tracking-widest text-foreground/40">
+            No transmissions yet. Stand by.
+          </p>
+        </HudCard>
+      ) : (
+        <ol class="space-y-4">
+          {posts.map((post, i) => {
+            const readMinutes = estimateReadingMinutes(post.body);
+            return (
+              <li>
+                <a
+                  href={`/posts/${post.id}/`}
+                  class="group block focus:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+                >
+                  <HudCard class="px-5 py-5 transition-all group-hover:border-primary/50 group-hover:shadow-[0_0_24px_color-mix(in_oklch,var(--glow)_22%,transparent)] md:px-7 md:py-6">
+                    <div class="flex flex-wrap items-center justify-between gap-3 font-mono text-[9px] uppercase tracking-[0.3em] text-foreground/30">
+                      <span>Tx {String(posts.length - i).padStart(3, '0')}</span>
+                      <div class="flex items-center gap-4">
+                        <time datetime={post.data.pubDate.toISOString()}>
+                          {dateLabel(post.data.pubDate)}
+                        </time>
+                        <span>{readMinutes} min read</span>
+                      </div>
+                    </div>
+
+                    <h2 class="mt-4 font-heading text-xl font-bold uppercase tracking-wider text-foreground transition-colors group-hover:text-primary md:text-2xl">
+                      {post.data.title}
+                    </h2>
+
+                    <p class="mt-3 text-sm leading-relaxed text-foreground/60 md:text-base">
+                      {post.data.description}
+                    </p>
+
+                    {post.data.tags.length > 0 && (
+                      <ul class="mt-4 flex flex-wrap gap-2">
+                        {post.data.tags.map((tag) => (
+                          <li class="rounded border border-primary/20 bg-primary/5 px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest text-primary/70">
+                            #{tag}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </HudCard>
+                </a>
+              </li>
+            );
+          })}
+        </ol>
+      )
+    }
+  </section>
+</Base>

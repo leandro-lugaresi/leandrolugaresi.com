@@ -1,7 +1,11 @@
 ---
 import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 import Base from '@/layouts/Base.astro';
 import HudCard from '@/components/site/HudCard.astro';
+import { TableOfContents } from '@/components/blog/TableOfContents';
+import { ScrollToTop } from '@/components/blog/ScrollToTop';
+import { ShareButtons } from '@/components/blog/ShareButtons';
 import { social } from '@/data/home';
 
 export async function getStaticPaths() {
@@ -10,12 +14,15 @@ export async function getStaticPaths() {
   );
   return posts.map((post) => ({
     params: { slug: post.id },
-    props: { post },
+    props: { post, allPosts: posts },
   }));
 }
 
-const { post } = Astro.props;
-const { Content, remarkPluginFrontmatter } = await render(post);
+const { post, allPosts } = Astro.props as {
+  post: CollectionEntry<'blog'>;
+  allPosts: CollectionEntry<'blog'>[];
+};
+const { Content, headings, remarkPluginFrontmatter } = await render(post);
 
 const readingTime =
   (remarkPluginFrontmatter as { readingTime?: { text: string } }).readingTime
@@ -33,6 +40,24 @@ const formattedUpdated = post.data.updatedDate?.toLocaleDateString('en-US', {
 });
 
 const githubLink = social.find((s) => s.label === 'GitHub')?.href ?? '#';
+
+// Related posts: most tag overlap, ties broken by recency. Falls back to
+// most-recent when nothing overlaps.
+const postTags = new Set(post.data.tags);
+const related = allPosts
+  .filter((p) => p.id !== post.id)
+  .map((p) => ({
+    p,
+    overlap: p.data.tags.filter((t) => postTags.has(t)).length,
+  }))
+  .sort((a, b) => {
+    if (b.overlap !== a.overlap) return b.overlap - a.overlap;
+    return b.p.data.pubDate.getTime() - a.p.data.pubDate.getTime();
+  })
+  .slice(0, 3)
+  .map(({ p }) => p);
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
 ---
 
 <Base
@@ -40,124 +65,191 @@ const githubLink = social.find((s) => s.label === 'GitHub')?.href ?? '#';
   description={post.data.description}
   ogType="article"
 >
-  <article class="relative mx-auto max-w-3xl px-6 py-16 md:py-24">
-    {/* Breadcrumbs */}
-    <nav
-      aria-label="Breadcrumb"
-      class="mb-8 font-mono text-[10px] uppercase tracking-widest text-foreground/40"
-    >
-      <ol class="flex flex-wrap items-center gap-2">
-        <li><a href="/" class="transition-colors hover:text-primary">Home</a></li>
-        <li aria-hidden="true" class="text-foreground/20">/</li>
-        <li>
-          <a href="/posts/" class="transition-colors hover:text-primary">Posts</a>
-        </li>
-        <li aria-hidden="true" class="text-foreground/20">/</li>
-        <li class="text-foreground/70">{post.data.title}</li>
-      </ol>
-    </nav>
-
-    {/* Header */}
-    <header class="mb-10">
-      <p
-        class="font-mono text-[10px] uppercase tracking-[0.4em] text-primary/70"
-      >
-        // Transmission
-      </p>
-      <h1
-        class="mt-4 font-heading text-3xl font-bold uppercase tracking-wide text-foreground md:text-5xl"
-      >
-        {post.data.title}
-      </h1>
-      <p class="mt-4 text-base leading-relaxed text-foreground/70 md:text-lg">
-        {post.data.description}
-      </p>
-
-      <dl
-        class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[10px] uppercase tracking-widest text-foreground/40"
-      >
-        <div class="flex items-center gap-2">
-          <dt class="text-foreground/30">Date</dt>
-          <dd class="text-foreground/80">
-            <time datetime={post.data.pubDate.toISOString()}>
-              {formattedDate}
-            </time>
-          </dd>
-        </div>
-        {readingTime && (
-          <div class="flex items-center gap-2">
-            <dt class="text-foreground/30">Read</dt>
-            <dd class="text-foreground/80">{readingTime}</dd>
-          </div>
-        )}
-        {formattedUpdated && (
-          <div class="flex items-center gap-2">
-            <dt class="text-foreground/30">Updated</dt>
-            <dd class="text-foreground/80">
-              <time datetime={post.data.updatedDate!.toISOString()}>
-                {formattedUpdated}
-              </time>
-            </dd>
-          </div>
-        )}
-      </dl>
-
-      {post.data.tags.length > 0 && (
-        <ul class="mt-4 flex flex-wrap gap-2">
-          {post.data.tags.map((tag) => (
-            <li
-              class="rounded border border-primary/30 bg-primary/5 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-primary/80"
-            >
-              #{tag}
+  <div class="relative mx-auto max-w-6xl px-6 py-16 md:py-24">
+    <div class="lg:grid lg:grid-cols-[minmax(0,1fr)_14rem] lg:gap-10">
+      <article class="relative mx-auto w-full max-w-3xl lg:mx-0">
+        {/* Breadcrumbs */}
+        <nav
+          aria-label="Breadcrumb"
+          class="mb-8 font-mono text-[10px] uppercase tracking-widest text-foreground/40"
+        >
+          <ol class="flex flex-wrap items-center gap-2">
+            <li><a href="/" class="transition-colors hover:text-primary">Home</a></li>
+            <li aria-hidden="true" class="text-foreground/20">/</li>
+            <li>
+              <a href="/posts/" class="transition-colors hover:text-primary">Posts</a>
             </li>
-          ))}
-        </ul>
-      )}
-    </header>
+            <li aria-hidden="true" class="text-foreground/20">/</li>
+            <li class="text-foreground/70">{post.data.title}</li>
+          </ol>
+        </nav>
 
-    {/* Content */}
-    <div class="prose-post">
-      <Content />
-    </div>
-
-    {/* Author box */}
-    <HudCard class="mt-16 px-6 py-6">
-      <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
-        <div
-          class="flex h-12 w-12 shrink-0 items-center justify-center rounded border border-primary/40 bg-primary/10 font-heading text-sm font-bold text-primary"
-        >
-          LL
-        </div>
-        <div class="flex-1">
-          <div
-            class="font-mono text-[9px] uppercase tracking-[0.4em] text-primary/70"
+        {/* Header */}
+        <header class="mb-10">
+          <p
+            class="font-mono text-[10px] uppercase tracking-[0.4em] text-primary/70"
           >
-            Operator
-          </div>
-          <p class="mt-1 font-heading text-base font-bold uppercase tracking-wider text-foreground">
-            Leandro Lugaresi
+            // Transmission
           </p>
-          <p class="mt-1 text-sm leading-relaxed text-foreground/60">
-            Backend & systems engineer. Writing about Go, data pipelines, and
-            the Cloudflare playground.
+          <h1
+            class="mt-4 font-heading text-3xl font-bold uppercase tracking-wide text-foreground md:text-5xl"
+          >
+            {post.data.title}
+          </h1>
+          <p class="mt-4 text-base leading-relaxed text-foreground/70 md:text-lg">
+            {post.data.description}
           </p>
+
+          <dl
+            class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[10px] uppercase tracking-widest text-foreground/40"
+          >
+            <div class="flex items-center gap-2">
+              <dt class="text-foreground/30">Date</dt>
+              <dd class="text-foreground/80">
+                <time datetime={post.data.pubDate.toISOString()}>
+                  {formattedDate}
+                </time>
+              </dd>
+            </div>
+            {readingTime && (
+              <div class="flex items-center gap-2">
+                <dt class="text-foreground/30">Read</dt>
+                <dd class="text-foreground/80">{readingTime}</dd>
+              </div>
+            )}
+            {formattedUpdated && (
+              <div class="flex items-center gap-2">
+                <dt class="text-foreground/30">Updated</dt>
+                <dd class="text-foreground/80">
+                  <time datetime={post.data.updatedDate!.toISOString()}>
+                    {formattedUpdated}
+                  </time>
+                </dd>
+              </div>
+            )}
+          </dl>
+
+          {post.data.tags.length > 0 && (
+            <ul class="mt-4 flex flex-wrap gap-2">
+              {post.data.tags.map((tag) => (
+                <li
+                  class="rounded border border-primary/30 bg-primary/5 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-primary/80"
+                >
+                  #{tag}
+                </li>
+              ))}
+            </ul>
+          )}
+        </header>
+
+        {/* Content */}
+        <div class="prose-post">
+          <Content />
         </div>
-        <a
-          href={githubLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="shrink-0 rounded border border-primary/30 px-4 py-2 font-mono text-[10px] uppercase tracking-widest text-foreground/70 transition-all hover:border-primary/60 hover:text-primary"
-        >
-          GitHub
-        </a>
-      </div>
-    </HudCard>
-  </article>
+
+        {/* Share */}
+        <div class="mt-12 border-t border-primary/10 pt-6">
+          <ShareButtons
+            client:idle
+            url={canonical}
+            title={post.data.title}
+          />
+        </div>
+
+        {/* Author box */}
+        <HudCard class="mt-10 px-6 py-6">
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
+            <div
+              class="flex h-12 w-12 shrink-0 items-center justify-center rounded border border-primary/40 bg-primary/10 font-heading text-sm font-bold text-primary"
+            >
+              LL
+            </div>
+            <div class="flex-1">
+              <div
+                class="font-mono text-[9px] uppercase tracking-[0.4em] text-primary/70"
+              >
+                Operator
+              </div>
+              <p class="mt-1 font-heading text-base font-bold uppercase tracking-wider text-foreground">
+                Leandro Lugaresi
+              </p>
+              <p class="mt-1 text-sm leading-relaxed text-foreground/60">
+                Backend & systems engineer. Writing about Go, data pipelines,
+                and the Cloudflare playground.
+              </p>
+            </div>
+            <a
+              href={githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="shrink-0 rounded border border-primary/30 px-4 py-2 font-mono text-[10px] uppercase tracking-widest text-foreground/70 transition-all hover:border-primary/60 hover:text-primary"
+            >
+              GitHub
+            </a>
+          </div>
+        </HudCard>
+
+        {/* Related */}
+        {related.length > 0 && (
+          <section class="mt-16">
+            <p
+              class="font-mono text-[10px] uppercase tracking-[0.4em] text-primary/70"
+            >
+              // Adjacent Transmissions
+            </p>
+            <h2
+              class="mt-3 font-heading text-xl font-bold uppercase tracking-wider text-foreground"
+            >
+              Related posts
+            </h2>
+            <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {related.map((r) => {
+                const rDate = r.data.pubDate.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                });
+                return (
+                  <li>
+                    <a
+                      href={`/posts/${r.id}/`}
+                      class="group block h-full rounded border border-primary/20 bg-card/40 p-4 transition-all hover:border-primary/60 hover:bg-card/70"
+                    >
+                      <div
+                        class="font-mono text-[9px] uppercase tracking-widest text-foreground/40"
+                      >
+                        <time datetime={r.data.pubDate.toISOString()}>
+                          {rDate}
+                        </time>
+                      </div>
+                      <h3
+                        class="mt-2 font-heading text-sm font-bold uppercase tracking-wider text-foreground transition-colors group-hover:text-primary"
+                      >
+                        {r.data.title}
+                      </h3>
+                      <p class="mt-2 text-xs leading-relaxed text-foreground/60">
+                        {r.data.description}
+                      </p>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        )}
+      </article>
+
+      {/* TOC sidebar (lg+ only) */}
+      <aside class="hidden lg:block">
+        <TableOfContents client:visible headings={headings} />
+      </aside>
+    </div>
+  </div>
+
+  <ScrollToTop client:visible />
 </Base>
 
 <style is:global>
-  /* Prose styling for post content. Scoped to .prose-post so it
-     doesn't leak into the rest of the site. */
   .prose-post {
     color: color-mix(in oklch, var(--foreground) 75%, transparent);
     font-size: 1rem;
@@ -176,6 +268,7 @@ const githubLink = social.find((s) => s.label === 'GitHub')?.href ?? '#';
     letter-spacing: 0.04em;
     margin-top: 2.5em;
     margin-bottom: 0.5em;
+    scroll-margin-top: 6rem;
   }
   .prose-post h2 {
     font-size: 1.5rem;

@@ -114,7 +114,15 @@ export function shikiTronChrome(): ShikiTransformer {
             ? preProps.className.join(' ')
             : '';
       preProps.className =
-        `${existing} relative bg-transparent overflow-x-auto font-mono text-sm leading-5 !m-0 !p-4`.trim();
+        `${existing} relative z-[1] overflow-x-auto font-mono text-sm leading-5 !m-0 !p-4`.trim();
+
+      // Shiki emits an inline `background-color` on <pre>; strip it so the
+      // wrapper's card bg + scanline overlay come through.
+      if (typeof preProps.style === 'string') {
+        preProps.style = preProps.style
+          .replace(/background-color\s*:\s*[^;]+;?/i, '')
+          .trim();
+      }
 
       const wrapper: Element = {
         type: 'element',

@@ -113,7 +113,7 @@ export const hero: HeroData = {
 export const system: SystemMeta = {
   location: "Joinville · BR",
   status: "Open to ideas",
-  role: "Senior backend",
+  role: "Software Engineer",
   build: "OK",
   posts: "Pending",
   mode: "Dark / Clu",
@@ -158,7 +158,7 @@ export const stats: StatCard[] = [
     label: "Sync speedup",
     value: "24",
     unit: "×",
-    sub: "on a 6B-record catalog",
+    sub: "on a 6 billion-record catalog",
   },
   {
     label: "Zero-incident streak",

@@ -47,9 +47,9 @@ const githubLink = social.find((s) => s.label === 'GitHub')?.href ?? '#';
         <HUDCornerFrame position="bottom-left" size={40} className="border-primary" />
         <HUDCornerFrame position="bottom-right" size={40} className="border-primary" />
 
-        <!-- centered label cutout on top edge -->
+        <!-- centered label cutout on top edge — hidden on narrow viewports where it collides with the corner brackets -->
         <div
-          class="absolute -top-3 left-1/2 -translate-x-1/2 bg-background px-4 font-mono text-[10px] tracking-[0.5em] text-primary"
+          class="absolute -top-3 left-1/2 hidden -translate-x-1/2 bg-background px-4 font-mono text-[10px] tracking-[0.5em] text-primary min-[800px]:block"
         >
           [ TRANSMISSION · ONLINE ]
         </div>

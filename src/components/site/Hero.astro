@@ -1,5 +1,7 @@
 ---
 import PerspectiveGrid from '@/components/site/PerspectiveGrid.astro';
+import { UplinkHeader } from '@/components/thegridcn/uplink-header';
+import { HUDCornerFrame } from '@/components/thegridcn/hud-corner-frame';
 import { hero, social } from '@/data/home';
 
 /**
@@ -7,7 +9,7 @@ import { hero, social } from '@/data/home';
  * (educlopez/thegridcn-ui app/page.tsx) but rewritten as static
  * SSR with a CSS perspective grid in place of Three.js Grid3D.
  *
- * All copy comes from src/data/home.ts.
+ * Uses gridcn UplinkHeader + HUDCornerFrame. All copy from home.ts.
  */
 
 // Split the full name on the first space — first word stacks above,
@@ -24,16 +26,12 @@ const githubLink = social.find((s) => s.label === 'GitHub')?.href ?? '#';
   <PerspectiveGrid />
 
   <!-- thin uplink bar at the very top of the hero -->
-  <div
-    class="absolute inset-x-0 top-0 z-20 border-b border-primary/15 bg-background/40 backdrop-blur-sm"
-  >
-    <div
-      class="mx-auto flex max-w-6xl items-center justify-between px-6 py-1.5 font-mono text-[9px] uppercase tracking-widest text-foreground/40"
-    >
-      <span>UPLINK · leandrolugaresi.com.br</span>
-      <span class="hidden sm:inline">SECTOR · backend &middot; systems &middot; go</span>
-      <span class="text-primary/70">STATUS · ONLINE</span>
-    </div>
+  <div class="absolute inset-x-0 top-0 z-20 backdrop-blur-sm">
+    <UplinkHeader
+      leftText="UPLINK · leandrolugaresi.com.br"
+      rightText="STATUS · ONLINE"
+      className="bg-background/40"
+    />
   </div>
 
   <!-- main centered content with outer scanning frame -->
@@ -43,11 +41,11 @@ const githubLink = social.find((s) => s.label === 'GitHub')?.href ?? '#';
       <div aria-hidden="true" class="absolute -inset-6 md:-inset-10">
         <div class="absolute inset-0 border border-primary/20"></div>
 
-        <!-- thicker corner brackets -->
-        <div class="absolute -left-1 -top-1 h-10 w-10 border-l-2 border-t-2 border-primary"></div>
-        <div class="absolute -right-1 -top-1 h-10 w-10 border-r-2 border-t-2 border-primary"></div>
-        <div class="absolute -bottom-1 -left-1 h-10 w-10 border-b-2 border-l-2 border-primary"></div>
-        <div class="absolute -bottom-1 -right-1 h-10 w-10 border-b-2 border-r-2 border-primary"></div>
+        <!-- thicker corner brackets (gridcn HUDCornerFrame) -->
+        <HUDCornerFrame position="top-left" size={40} className="border-primary" />
+        <HUDCornerFrame position="top-right" size={40} className="border-primary" />
+        <HUDCornerFrame position="bottom-left" size={40} className="border-primary" />
+        <HUDCornerFrame position="bottom-right" size={40} className="border-primary" />
 
         <!-- centered label cutout on top edge -->
         <div

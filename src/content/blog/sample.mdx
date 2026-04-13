@@ -1,0 +1,32 @@
+---
+title: Sample transmission
+description: Smoke-test post that exercises the MDX pipeline, Tron code chrome, and reading-time plugin.
+pubDate: 2026-04-13
+tags: [meta, smoke-test]
+draft: false
+---
+
+This post exists to verify that the blog pipeline renders correctly:
+headings, prose, inline `code`, and fenced code blocks with the custom
+Tron chrome.
+
+## A fenced block with filename
+
+```ts filename="example.ts"
+import { defineConfig } from 'astro/config';
+
+export default defineConfig({
+  site: 'https://leandrolugaresi.com.br',
+});
+```
+
+## A fenced block without filename
+
+```bash
+bun run build && bun run preview
+```
+
+## Prose continues after
+
+The paragraph after a code block should breathe normally and sit on the
+same grid as the rest of the content.

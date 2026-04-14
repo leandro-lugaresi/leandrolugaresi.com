@@ -29,6 +29,11 @@ const SITE_NAME = 'Leandro Lugaresi';
 const fullTitle = title === SITE_NAME ? title : `${title} · ${SITE_NAME}`;
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
 const ogImageUrl = new URL(ogImage, Astro.site ?? Astro.url).toString();
+
+// Cloudflare Web Analytics. The beacon token is generated in the Pages
+// dashboard once per project and exposed here as a public env var so the
+// script tag can be rendered at build time. Skipped locally (no token).
+const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
 ---
 
 <!doctype html>
@@ -67,5 +72,13 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? Astro.url).toString();
       </main>
       <Footer />
     </div>
+    {cfAnalyticsToken && (
+      <script
+        is:inline
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={`{"token": "${cfAnalyticsToken}"}`}
+      ></script>
+    )}
   </body>
 </html>

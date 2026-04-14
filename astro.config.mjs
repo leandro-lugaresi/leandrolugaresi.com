@@ -7,6 +7,7 @@ import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 
 import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
 
 import { remarkReadingTime } from './src/lib/reading-time.ts';
 import { shikiTronChrome } from './src/lib/shiki-tron-chrome.ts';
@@ -35,7 +36,7 @@ const BUILD_TIME = new Date().toISOString();
 // https://astro.build/config
 export default defineConfig({
   site: 'https://leandrolugaresi.com.br',
-  integrations: [react(), mdx()],
+  integrations: [react(), mdx(), sitemap()],
 
   markdown: {
     remarkPlugins: [remarkReadingTime],

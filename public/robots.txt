@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://leandrolugaresi.com.br/sitemap-index.xml

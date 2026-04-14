@@ -1,0 +1,174 @@
+---
+import Base from '@/layouts/Base.astro';
+---
+
+<Base
+  title="Signal lost · 404"
+  description="I'm sorry, Dave. I'm afraid I can't do that."
+>
+  <section
+    class="relative mx-auto flex min-h-[80vh] max-w-4xl flex-col items-center justify-center px-6 py-20 text-center"
+  >
+    {/* Top HUD strip */}
+    <div
+      class="mb-12 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.5em] text-primary/70"
+    >
+      <span aria-hidden="true" class="h-px w-12 bg-primary/60"></span>
+      <span>HAL · 9000</span>
+      <span aria-hidden="true" class="h-px w-12 bg-primary/60"></span>
+    </div>
+
+    {/* HAL eye */}
+    <div class="relative" aria-hidden="true">
+      <div class="hal-eye">
+        <div class="hal-eye-iris"></div>
+        <div class="hal-eye-pupil"></div>
+        <div class="hal-eye-glint"></div>
+      </div>
+    </div>
+
+    {/* Main quote */}
+    <h1
+      class="mt-12 max-w-3xl font-heading text-2xl font-bold uppercase leading-tight tracking-wide text-foreground md:text-4xl"
+      style="text-shadow: 0 0 40px color-mix(in oklch, var(--glow) 20%, transparent);"
+    >
+      I'm sorry, Dave.
+      <span class="block mt-2 text-primary">I'm afraid I can't do that.</span>
+    </h1>
+
+    <p
+      class="mt-6 max-w-xl text-base leading-relaxed text-foreground/60 md:text-lg"
+    >
+      This mission is too important for me to allow you to jeopardize it.
+      The file you requested is not on this drive.
+    </p>
+
+    {/* Diagnostic readout */}
+    <dl
+      class="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-[10px] uppercase tracking-widest text-foreground/40"
+    >
+      <div class="flex items-center gap-2">
+        <dt class="text-foreground/30">Code</dt>
+        <dd class="text-foreground/80">404 · not found</dd>
+      </div>
+      <div class="flex items-center gap-2">
+        <dt class="text-foreground/30">Unit</dt>
+        <dd class="text-foreground/80">HAL 9000</dd>
+      </div>
+      <div class="flex items-center gap-2">
+        <dt class="text-foreground/30">Status</dt>
+        <dd class="text-primary/80">Operational</dd>
+      </div>
+    </dl>
+
+    {/* CTAs */}
+    <div class="mt-12 flex flex-wrap items-center justify-center gap-4">
+      <a
+        href="/"
+        class="group relative overflow-hidden rounded border-2 border-primary bg-primary/15 px-7 py-3 font-mono text-xs font-bold uppercase tracking-widest text-primary transition-all hover:bg-primary hover:text-primary-foreground hover:shadow-[0_0_40px_var(--primary)]"
+      >
+        <span class="relative z-10">Open the pod bay doors</span>
+        <span
+          aria-hidden="true"
+          class="absolute inset-0 -z-0 translate-y-full bg-primary transition-transform duration-300 group-hover:translate-y-0"
+        ></span>
+      </a>
+      <a
+        href="/posts/"
+        class="rounded border border-primary/30 bg-transparent px-7 py-3 font-mono text-xs font-bold uppercase tracking-widest text-foreground/70 transition-all hover:border-primary/60 hover:text-primary hover:shadow-[0_0_24px_color-mix(in_oklch,var(--glow)_35%,transparent)]"
+      >
+        Browse transmissions
+      </a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* HAL 9000 camera eye — concentric circles with a slow radial pulse,
+     recoloured in the Clu amber palette so it fits the rest of the chrome.
+     The "glint" arc is Kubrick's asymmetric highlight in the upper-left. */
+  .hal-eye {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at center,
+      #0a0a0a 0%,
+      #1a0a00 55%,
+      #000 100%
+    );
+    border: 2px solid color-mix(in oklch, var(--primary) 55%, transparent);
+    box-shadow:
+      0 0 60px color-mix(in oklch, var(--glow) 45%, transparent),
+      0 0 120px color-mix(in oklch, var(--glow) 25%, transparent),
+      inset 0 0 40px rgba(0, 0, 0, 0.8);
+    animation: hal-breathe 3.5s ease-in-out infinite;
+  }
+
+  .hal-eye-iris {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    margin: -60px 0 0 -60px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at center,
+      var(--primary) 0%,
+      color-mix(in oklch, var(--primary) 80%, #000) 55%,
+      color-mix(in oklch, var(--primary) 35%, #000) 100%
+    );
+    box-shadow:
+      inset 0 0 30px rgba(0, 0, 0, 0.6),
+      0 0 40px color-mix(in oklch, var(--glow) 55%, transparent);
+  }
+
+  .hal-eye-pupil {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 28px;
+    height: 28px;
+    margin: -14px 0 0 -14px;
+    border-radius: 50%;
+    background: #fff8ec;
+    box-shadow:
+      0 0 20px #fff8ec,
+      0 0 40px color-mix(in oklch, var(--glow) 70%, transparent);
+  }
+
+  .hal-eye-glint {
+    position: absolute;
+    top: 22%;
+    left: 25%;
+    width: 36px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    filter: blur(4px);
+    transform: rotate(-30deg);
+  }
+
+  @keyframes hal-breathe {
+    0%, 100% {
+      box-shadow:
+        0 0 60px color-mix(in oklch, var(--glow) 45%, transparent),
+        0 0 120px color-mix(in oklch, var(--glow) 25%, transparent),
+        inset 0 0 40px rgba(0, 0, 0, 0.8);
+    }
+    50% {
+      box-shadow:
+        0 0 80px color-mix(in oklch, var(--glow) 65%, transparent),
+        0 0 180px color-mix(in oklch, var(--glow) 40%, transparent),
+        inset 0 0 40px rgba(0, 0, 0, 0.8);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hal-eye {
+      animation: none;
+    }
+  }
+</style>

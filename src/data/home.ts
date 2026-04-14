@@ -28,7 +28,6 @@ export interface SystemMeta {
   status: string;
   role: string;
   build: string;
-  posts: string;
   mode: string;
 }
 
@@ -115,7 +114,6 @@ export const system: SystemMeta = {
   status: "Open to ideas",
   role: "Software Engineer",
   build: "OK",
-  posts: "Pending",
   mode: "Dark / Clu",
 };
 

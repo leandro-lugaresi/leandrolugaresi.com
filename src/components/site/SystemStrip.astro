@@ -1,4 +1,5 @@
 ---
+import { getCollection } from 'astro:content';
 import HudCard from '@/components/site/HudCard.astro';
 import { system } from '@/data/home';
 
@@ -7,8 +8,13 @@ import { system } from '@/data/home';
  * Holds the meta facts (location/status/role) on the left and a few
  * live-feed indicators on the right. Pure HTML — no React, no JS.
  *
- * All copy comes from src/data/home.ts (`system`).
+ * Most copy comes from src/data/home.ts (`system`). The Posts counter
+ * is derived from the blog collection so it stays truthful without
+ * me remembering to bump a string.
  */
+
+const publishedPosts = await getCollection('blog', ({ data }) => !data.draft);
+const postsValue = String(publishedPosts.length).padStart(2, '0');
 
 const META = [
   { label: 'Location', value: system.location },
@@ -18,7 +24,7 @@ const META = [
 
 const FEED = [
   { label: 'Build', value: system.build },
-  { label: 'Posts', value: system.posts },
+  { label: 'Posts', value: postsValue },
   { label: 'Mode', value: system.mode },
 ] as const;
 ---

@@ -64,6 +64,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString(
   title={post.data.title}
   description={post.data.description}
   ogType="article"
+  ogImage={`/og/${post.id}.png`}
 >
   <div class="relative mx-auto max-w-6xl px-6 py-16 md:py-24">
     <div class="lg:grid lg:grid-cols-[minmax(0,1fr)_14rem] lg:gap-10">

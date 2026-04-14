@@ -1,0 +1,179 @@
+---
+title: Per-post OG images with Satori on Cloudflare Pages
+description: How I wired Satori and resvg into Astro's static build to render a unique Open Graph image for every post — no Workers runtime, no external service, just TTF files and a PNG endpoint.
+pubDate: 2026-04-14
+tags: [astro, satori, cloudflare, og]
+---
+
+Every post on this site now ships with its own Open Graph image. The title,
+description, date, and tags get baked into a 1200×630 PNG at build time,
+written to `/og/<slug>.png`, and referenced from the post's `<meta
+property="og:image">`. No runtime, no third-party service, no Worker. Just
+two npm packages and a static endpoint.
+
+Here's how it's wired.
+
+## The shape of the problem
+
+Astro's static build is the easiest surface to target. I don't need a
+serverless function — I need a build-time hook that can read the blog
+collection and emit one PNG per post. Astro already has this: any file
+under `src/pages/` that exports `getStaticPaths` becomes a set of static
+routes, and a route ending in `.png.ts` can return a `Response` whose body
+is a `Uint8Array`.
+
+So the plan is one file:
+
+```ts filename="src/pages/og/[slug].png.ts"
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) =>
+    import.meta.env.PROD ? !data.draft : true,
+  );
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+export const GET: APIRoute = async ({ props }) => {
+  const png = await generateOgImage({ /* ... */ });
+  return new Response(new Uint8Array(png), {
+    headers: {
+      'Content-Type': 'image/png',
+      'Cache-Control': 'public, max-age=31536000, immutable',
+    },
+  });
+};
+```
+
+The draft filter matches the post page itself — drafts don't get an OG
+image in production, which is the same rule that hides them from the
+index.
+
+## Satori + resvg
+
+Satori takes a React-ish element tree and a set of font buffers, and
+returns SVG. [Resvg](https://github.com/yisibl/resvg-js) turns that SVG
+into a PNG. Both are pure Node, which matters: Cloudflare Pages' build
+step runs on Linux Node, and `@resvg/resvg-js` ships prebuilt native
+binaries for exactly that target.
+
+```ts filename="src/lib/og.tsx"
+import satori from 'satori';
+import { Resvg } from '@resvg/resvg-js';
+
+export async function generateOgImage(input: OgInput): Promise<Uint8Array> {
+  const fonts = await loadFonts();
+  const svg = await satori(<OgTemplate {...input} />, {
+    width: 1200,
+    height: 630,
+    fonts,
+  });
+  return new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } })
+    .render()
+    .asPng();
+}
+```
+
+The template itself is plain flex layout. Satori's subset of CSS is
+small but honest: no `color-mix()`, no CSS variables, no `grid`. Every
+element needs `display: flex` or it silently misrenders. I inlined the
+theme's amber and background hex values, since resolving the site's CSS
+variables isn't something Satori can do.
+
+## Fonts are the whole trick
+
+Satori doesn't bundle fonts. It won't read the system's Orbitron even if
+one exists. You have to hand it `Buffer` (or `ArrayBuffer`) data for
+every font family and weight you reference.
+
+The easiest reliable source: the [Fontsource](https://fontsource.org/)
+npm packages. They ship per-weight, per-subset `.woff` files — which
+Satori accepts directly — and resolve cleanly through `createRequire`:
+
+```ts
+const require = createRequire(import.meta.url);
+const [orbitron900, orbitron700, mono400] = await Promise.all([
+  readFile(require.resolve('@fontsource/orbitron/files/orbitron-latin-900-normal.woff')),
+  readFile(require.resolve('@fontsource/orbitron/files/orbitron-latin-700-normal.woff')),
+  readFile(require.resolve('@fontsource/geist-mono/files/geist-mono-latin-400-normal.woff')),
+]);
+```
+
+That fonts array is cached at module scope so the 20-odd posts don't
+each re-read the same three files from disk.
+
+## The design
+
+The card mirrors the static `/og.png` I already had: amber corner
+brackets, a grid of faint horizontal lines, an `LL` monogram chip, and
+a title block in Orbitron. The per-post template adds the date, a row
+of tag chips, and a description paragraph underneath the title. Font
+sizes bump down a step when the title is longer than 48 characters, so
+it stops running off the right frame.
+
+```tsx
+<div style={{
+  fontFamily: 'Orbitron',
+  fontWeight: 900,
+  fontSize: safeTitle.length > 48 ? 60 : 76,
+  lineHeight: 1.05,
+  letterSpacing: 2,
+  textTransform: 'uppercase',
+  textWrap: 'balance',
+}}>
+  {safeTitle}
+</div>
+```
+
+`textWrap: 'balance'` is the one piece of modern CSS Satori *does*
+understand, and it's the single biggest readability win for titles that
+wrap to two or three lines.
+
+## Wiring it into the post page
+
+The Astro post layout takes an `ogImage` prop that falls through to the
+Open Graph meta tags in `Base.astro`. One line does it:
+
+```astro
+<Base
+  title={post.data.title}
+  description={post.data.description}
+  ogType="article"
+  ogImage={`/og/${post.id}.png`}
+>
+```
+
+The `Base` layout already normalizes that path to an absolute URL using
+`Astro.site`, so the final `<meta property="og:image">` points at
+`https://leandrolugaresi.com.br/og/<slug>.png` — exactly what Twitter,
+LinkedIn, and iMessage want.
+
+## Why build-time and not runtime
+
+Cloudflare Pages has Workers. I could have put this behind a Function
+and generated the PNG on request. I chose the build step for three
+reasons.
+
+First, OG images don't change between deploys. Every cache lookup would
+return the same bytes until I edit the post. Generating once and serving
+from Cloudflare's static asset CDN is strictly cheaper and faster.
+
+Second, the content is known at build time. The blog collection is
+already loaded, the title and tags are already typed. Running Satori in
+a Worker would mean re-reading the MDX and re-loading fonts on every
+cold start.
+
+Third, debugging is easier. If a title breaks the layout, `bun run
+build` surfaces the broken PNG in `dist/og/` and I can open it locally
+before pushing anything.
+
+## Cost
+
+Build time went from ~2.3s to ~2.9s with one post generating an OG
+image. Each additional post adds maybe 50ms of Satori + resvg work on
+a warm process. That's a budget I'm comfortable spending.
+
+---
+
+If you're looking at this post's OG card right now, that's the output.
+Same pipeline, rendered at build time, shipped as a static asset. The
+full source is two files: [`src/lib/og.tsx`](https://github.com/leandrolugaresi/leandrolugaresi.com/blob/master/src/lib/og.tsx)
+and [`src/pages/og/[slug].png.ts`](https://github.com/leandrolugaresi/leandrolugaresi.com/blob/master/src/pages/og/%5Bslug%5D.png.ts).
